@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniteddata.xqds.collector.dao.sqlserver.jddaq.TBasicPipecfgpzMapper">
+  <resultMap id="BaseResultMap" type="com.uniteddata.xqds.collector.entity.TBasicPipecfgpz">
+    <id column="PCfgNO" jdbcType="CHAR" property="pcfgno" />
+    <result column="FMPoint" jdbcType="FLOAT" property="fmpoint" />
+    <result column="PipeCfg" jdbcType="INTEGER" property="pipecfg" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PCfgNO, FMPoint, PipeCfg
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_Basic_PipeCfgPZ
+    where PCfgNO = #{pcfgno,jdbcType=CHAR}
+  </select>
+    <select id="selectByPipes" resultType="com.uniteddata.xqds.collector.entity.TBasicPipecfgpz">
+      select * from T_Basic_PipeCfgPZ where PipeCfg in
+
+      <foreach item = "item" collection = "ids" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from T_Basic_PipeCfgPZ
+    where PCfgNO = #{pcfgno,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" keyColumn="PCfgNO" keyProperty="pcfgno" parameterType="com.uniteddata.xqds.collector.entity.TBasicPipecfgpz" useGeneratedKeys="true">
+    insert into T_Basic_PipeCfgPZ (FMPoint, PipeCfg)
+    values (#{fmpoint,jdbcType=FLOAT}, #{pipecfg,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="PCfgNO" keyProperty="pcfgno" parameterType="com.uniteddata.xqds.collector.entity.TBasicPipecfgpz" useGeneratedKeys="true">
+    insert into T_Basic_PipeCfgPZ
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fmpoint != null">
+        FMPoint,
+      </if>
+      <if test="pipecfg != null">
+        PipeCfg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fmpoint != null">
+        #{fmpoint,jdbcType=FLOAT},
+      </if>
+      <if test="pipecfg != null">
+        #{pipecfg,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uniteddata.xqds.collector.entity.TBasicPipecfgpz">
+    update T_Basic_PipeCfgPZ
+    <set>
+      <if test="fmpoint != null">
+        FMPoint = #{fmpoint,jdbcType=FLOAT},
+      </if>
+      <if test="pipecfg != null">
+        PipeCfg = #{pipecfg,jdbcType=INTEGER},
+      </if>
+    </set>
+    where PCfgNO = #{pcfgno,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uniteddata.xqds.collector.entity.TBasicPipecfgpz">
+    update T_Basic_PipeCfgPZ
+    set FMPoint = #{fmpoint,jdbcType=FLOAT},
+      PipeCfg = #{pipecfg,jdbcType=INTEGER}
+    where PCfgNO = #{pcfgno,jdbcType=CHAR}
+  </update>
+</mapper>

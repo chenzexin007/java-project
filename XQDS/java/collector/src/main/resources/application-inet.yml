@@ -1,0 +1,63 @@
+server:
+  port: 18008
+
+spring:
+  application:
+    name: collector
+  datasource:
+    # 主数据源 mysql
+    db1:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/db_xqds_gzjlz_server?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&allowPublicKeyRetrieval=true&allowMultiQueries=true
+      username: root
+      password: zFJBrPET
+    # 次数据源 sqlserver
+    db2:
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+      jdbc-url: jdbc:sqlserver://localhost:1433;DatabaseName=JD_DAQ
+      username: sa
+      password: FmjobRU2
+    db3:
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+      jdbc-url: jdbc:sqlserver://localhost:1433;DatabaseName=RFMSDB
+      username: sa
+      password: FmjobRU2
+  data:
+    mongodb:
+      uri: mongodb://xqds_gzjlz:TdFKnDDQ@localhost/db_xqds_gzjlz
+      authentication-database: db_xqds_gzjlz
+  resources:
+    static-locations: classpath:static/**
+
+#mybatis
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+xqds:
+  script:
+    python: D:\Program\Python27\ArcGIS10.2\python.exe
+    spider05: D:\tmp\xqds_gzjlz\script\19216805.py
+    spider02: D:\tmp\xqds_gzjlz\script\19216802.py
+    execute: true
+  schedule:
+    # webSocket 推送频率 0/30 * * * * ? 30秒 0 */5 * * * ? 5分钟
+    websocketRate: 0 */5 * * * ?
+    # opc采集频率
+    collectRate: 0/5 * * * * ?
+    # 执行采集超时时间 单位 毫秒
+    collectTimeOut: 60000
+    # 每天晚上3点定时清理
+    clearRate: 0 0 3 * * ?
+    # 实时推送控制策略 3秒一次
+    strategyRate: 0/3 * * * * ?
+    # 实时推送单个编号检定结果检定
+    verificationRate: 0/10 * * * * ?
+    # 两秒推送一次检定状态
+    checkStateRate: 0/10 * * * * ?
+    # 确定检定数据状态的时间 多久内有数据就是在鉴定
+    checkStepTime: 120000
+  info:
+    logWsAddress: ws://192.168.3.27:18009/
+    uploadPath: /upload
+  condition:
+    logSpider: false

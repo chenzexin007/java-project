@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间： 指向实现类-->
+
+<mapper namespace="com.zexin.dao.StudentDao">
+    <select id="getUserList" resultMap="studentTeacher">
+        select * from jdbctemplate.student
+    </select>
+
+    <resultMap id="studentTeacher" type="student">
+        <association property="teacher" column="tid" javaType="teacher" select="getTeacher"></association>
+    </resultMap>
+
+    <select id="getTeacher" resultType="teacher" parameterType="int">
+        select * from jdbctemplate.teacher where id=#{id}
+    </select>
+</mapper>

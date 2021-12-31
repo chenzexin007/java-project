@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniteddata.xqds.collector.dao.sqlserver.jddaq.TBasicStddevMapper">
+  <resultMap id="BaseResultMap" type="com.uniteddata.xqds.collector.entity.TBasicStddev">
+    <id column="TagNO" jdbcType="CHAR" property="tagno" />
+    <result column="PipeNO" jdbcType="TINYINT" property="pipeno" />
+    <result column="DevType" jdbcType="CHAR" property="devtype" />
+    <result column="TT" jdbcType="CHAR" property="tt" />
+    <result column="PT" jdbcType="CHAR" property="pt" />
+    <result column="PU" jdbcType="CHAR" property="pu" />
+    <result column="MOV" jdbcType="CHAR" property="mov" />
+    <result column="Mode" jdbcType="TINYINT" property="mode" />
+    <result column="MinVal" jdbcType="FLOAT" property="minval" />
+    <result column="MaxVal" jdbcType="FLOAT" property="maxval" />
+    <result column="DevOD" jdbcType="CHAR" property="devod" />
+    <result column="ParaRecNO" jdbcType="INTEGER" property="pararecno" />
+    <result column="CertDate" jdbcType="INTEGER" property="certdate" />
+    <result column="Model" jdbcType="CHAR" property="model" />
+    <result column="Maker" jdbcType="CHAR" property="maker" />
+    <result column="FactoryNO" jdbcType="CHAR" property="factoryno" />
+    <result column="Name" jdbcType="CHAR" property="name" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    TagNO, PipeNO, DevType, TT, PT, PU, MOV, "Mode", MinVal, MaxVal, DevOD, ParaRecNO, 
+    CertDate, Model, Maker, FactoryNO, "Name"
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_Basic_StdDev
+    where TagNO = #{tagno,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultType="com.uniteddata.xqds.collector.entity.TBasicStddev">
+    select
+    <include refid="Base_Column_List" />
+    from T_Basic_StdDev
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from T_Basic_StdDev
+    where TagNO = #{tagno,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" keyColumn="TagNO" keyProperty="tagno" parameterType="com.uniteddata.xqds.collector.entity.TBasicStddev" useGeneratedKeys="true">
+    insert into T_Basic_StdDev (PipeNO, DevType, TT, 
+      PT, PU, MOV, "Mode", 
+      MinVal, MaxVal, DevOD, ParaRecNO, 
+      CertDate, Model, Maker, FactoryNO, 
+      "Name")
+    values (#{pipeno,jdbcType=TINYINT}, #{devtype,jdbcType=CHAR}, #{tt,jdbcType=CHAR}, 
+      #{pt,jdbcType=CHAR}, #{pu,jdbcType=CHAR}, #{mov,jdbcType=CHAR}, #{mode,jdbcType=TINYINT}, 
+      #{minval,jdbcType=FLOAT}, #{maxval,jdbcType=FLOAT}, #{devod,jdbcType=CHAR}, #{pararecno,jdbcType=INTEGER}, 
+      #{certdate,jdbcType=INTEGER}, #{model,jdbcType=CHAR}, #{maker,jdbcType=CHAR}, #{factoryno,jdbcType=CHAR}, 
+      #{name,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="TagNO" keyProperty="tagno" parameterType="com.uniteddata.xqds.collector.entity.TBasicStddev" useGeneratedKeys="true">
+    insert into T_Basic_StdDev
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pipeno != null">
+        PipeNO,
+      </if>
+      <if test="devtype != null">
+        DevType,
+      </if>
+      <if test="tt != null">
+        TT,
+      </if>
+      <if test="pt != null">
+        PT,
+      </if>
+      <if test="pu != null">
+        PU,
+      </if>
+      <if test="mov != null">
+        MOV,
+      </if>
+      <if test="mode != null">
+        "Mode",
+      </if>
+      <if test="minval != null">
+        MinVal,
+      </if>
+      <if test="maxval != null">
+        MaxVal,
+      </if>
+      <if test="devod != null">
+        DevOD,
+      </if>
+      <if test="pararecno != null">
+        ParaRecNO,
+      </if>
+      <if test="certdate != null">
+        CertDate,
+      </if>
+      <if test="model != null">
+        Model,
+      </if>
+      <if test="maker != null">
+        Maker,
+      </if>
+      <if test="factoryno != null">
+        FactoryNO,
+      </if>
+      <if test="name != null">
+        "Name",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pipeno != null">
+        #{pipeno,jdbcType=TINYINT},
+      </if>
+      <if test="devtype != null">
+        #{devtype,jdbcType=CHAR},
+      </if>
+      <if test="tt != null">
+        #{tt,jdbcType=CHAR},
+      </if>
+      <if test="pt != null">
+        #{pt,jdbcType=CHAR},
+      </if>
+      <if test="pu != null">
+        #{pu,jdbcType=CHAR},
+      </if>
+      <if test="mov != null">
+        #{mov,jdbcType=CHAR},
+      </if>
+      <if test="mode != null">
+        #{mode,jdbcType=TINYINT},
+      </if>
+      <if test="minval != null">
+        #{minval,jdbcType=FLOAT},
+      </if>
+      <if test="maxval != null">
+        #{maxval,jdbcType=FLOAT},
+      </if>
+      <if test="devod != null">
+        #{devod,jdbcType=CHAR},
+      </if>
+      <if test="pararecno != null">
+        #{pararecno,jdbcType=INTEGER},
+      </if>
+      <if test="certdate != null">
+        #{certdate,jdbcType=INTEGER},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=CHAR},
+      </if>
+      <if test="maker != null">
+        #{maker,jdbcType=CHAR},
+      </if>
+      <if test="factoryno != null">
+        #{factoryno,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uniteddata.xqds.collector.entity.TBasicStddev">
+    update T_Basic_StdDev
+    <set>
+      <if test="pipeno != null">
+        PipeNO = #{pipeno,jdbcType=TINYINT},
+      </if>
+      <if test="devtype != null">
+        DevType = #{devtype,jdbcType=CHAR},
+      </if>
+      <if test="tt != null">
+        TT = #{tt,jdbcType=CHAR},
+      </if>
+      <if test="pt != null">
+        PT = #{pt,jdbcType=CHAR},
+      </if>
+      <if test="pu != null">
+        PU = #{pu,jdbcType=CHAR},
+      </if>
+      <if test="mov != null">
+        MOV = #{mov,jdbcType=CHAR},
+      </if>
+      <if test="mode != null">
+        "Mode" = #{mode,jdbcType=TINYINT},
+      </if>
+      <if test="minval != null">
+        MinVal = #{minval,jdbcType=FLOAT},
+      </if>
+      <if test="maxval != null">
+        MaxVal = #{maxval,jdbcType=FLOAT},
+      </if>
+      <if test="devod != null">
+        DevOD = #{devod,jdbcType=CHAR},
+      </if>
+      <if test="pararecno != null">
+        ParaRecNO = #{pararecno,jdbcType=INTEGER},
+      </if>
+      <if test="certdate != null">
+        CertDate = #{certdate,jdbcType=INTEGER},
+      </if>
+      <if test="model != null">
+        Model = #{model,jdbcType=CHAR},
+      </if>
+      <if test="maker != null">
+        Maker = #{maker,jdbcType=CHAR},
+      </if>
+      <if test="factoryno != null">
+        FactoryNO = #{factoryno,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        "Name" = #{name,jdbcType=CHAR},
+      </if>
+    </set>
+    where TagNO = #{tagno,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uniteddata.xqds.collector.entity.TBasicStddev">
+    update T_Basic_StdDev
+    set PipeNO = #{pipeno,jdbcType=TINYINT},
+      DevType = #{devtype,jdbcType=CHAR},
+      TT = #{tt,jdbcType=CHAR},
+      PT = #{pt,jdbcType=CHAR},
+      PU = #{pu,jdbcType=CHAR},
+      MOV = #{mov,jdbcType=CHAR},
+      "Mode" = #{mode,jdbcType=TINYINT},
+      MinVal = #{minval,jdbcType=FLOAT},
+      MaxVal = #{maxval,jdbcType=FLOAT},
+      DevOD = #{devod,jdbcType=CHAR},
+      ParaRecNO = #{pararecno,jdbcType=INTEGER},
+      CertDate = #{certdate,jdbcType=INTEGER},
+      Model = #{model,jdbcType=CHAR},
+      Maker = #{maker,jdbcType=CHAR},
+      FactoryNO = #{factoryno,jdbcType=CHAR},
+      "Name" = #{name,jdbcType=CHAR}
+    where TagNO = #{tagno,jdbcType=CHAR}
+  </update>
+</mapper>

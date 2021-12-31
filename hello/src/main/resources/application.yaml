@@ -1,0 +1,34 @@
+server:
+  port: 8083
+spring:
+  profiles:
+    active: dev
+
+person:
+  name: 李雷
+  age: 23
+  dog:
+    sex: 母
+    age: 3
+  maps:
+    key1: value1
+    key2: { key2-1: value2-1, key2-2: value2-2 }
+    key3:
+      - key3-1
+      - key3-2
+  lists:
+    - list1
+    - list2
+
+---
+server:
+  port: 8084
+spring:
+  profiles: dev
+
+
+---
+server:
+  port: 8085
+spring:
+  profiles: test

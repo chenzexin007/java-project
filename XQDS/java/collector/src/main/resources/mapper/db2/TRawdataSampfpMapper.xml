@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniteddata.xqds.collector.dao.sqlserver.jddaq.TRawdataSampfpMapper">
+  <resultMap id="BaseResultMap" type="com.uniteddata.xqds.collector.entity.TRawdataSampfp">
+    <id column="RecNO" jdbcType="INTEGER" property="recno" />
+    <result column="TaskNO" jdbcType="INTEGER" property="taskno" />
+    <result column="PointNO" jdbcType="OTHER" property="pointno" />
+    <result column="FlowSetVal" jdbcType="FLOAT" property="flowsetval" />
+    <result column="CheckP" jdbcType="INTEGER" property="checkp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    RecNO, TaskNO, PointNO, FlowSetVal, CheckP
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_RawData_SampFP
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPointNo" resultType="com.uniteddata.xqds.collector.entity.TRawdataSampfp">
+    select
+    <include refid="Base_Column_List" />
+    from T_RawData_SampFP
+    where PointNO = #{pointNO}
+  </select>
+    <select id="selectByTaskNo" resultType="com.uniteddata.xqds.collector.entity.TRawdataSampfp">
+      select
+      <include refid="Base_Column_List" />
+      from T_RawData_SampFP
+      where TaskNO = #{taskno}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from T_RawData_SampFP
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="RecNO" keyProperty="recno" parameterType="com.uniteddata.xqds.collector.entity.TRawdataSampfp" useGeneratedKeys="true">
+    insert into T_RawData_SampFP (TaskNO, PointNO, FlowSetVal, 
+      CheckP)
+    values (#{taskno,jdbcType=INTEGER}, #{pointno,jdbcType=OTHER}, #{flowsetval,jdbcType=FLOAT}, 
+      #{checkp,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="RecNO" keyProperty="recno" parameterType="com.uniteddata.xqds.collector.entity.TRawdataSampfp" useGeneratedKeys="true">
+    insert into T_RawData_SampFP
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="taskno != null">
+        TaskNO,
+      </if>
+      <if test="pointno != null">
+        PointNO,
+      </if>
+      <if test="flowsetval != null">
+        FlowSetVal,
+      </if>
+      <if test="checkp != null">
+        CheckP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="taskno != null">
+        #{taskno,jdbcType=INTEGER},
+      </if>
+      <if test="pointno != null">
+        #{pointno,jdbcType=OTHER},
+      </if>
+      <if test="flowsetval != null">
+        #{flowsetval,jdbcType=FLOAT},
+      </if>
+      <if test="checkp != null">
+        #{checkp,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uniteddata.xqds.collector.entity.TRawdataSampfp">
+    update T_RawData_SampFP
+    <set>
+      <if test="taskno != null">
+        TaskNO = #{taskno,jdbcType=INTEGER},
+      </if>
+      <if test="pointno != null">
+        PointNO = #{pointno,jdbcType=OTHER},
+      </if>
+      <if test="flowsetval != null">
+        FlowSetVal = #{flowsetval,jdbcType=FLOAT},
+      </if>
+      <if test="checkp != null">
+        CheckP = #{checkp,jdbcType=INTEGER},
+      </if>
+    </set>
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uniteddata.xqds.collector.entity.TRawdataSampfp">
+    update T_RawData_SampFP
+    set TaskNO = #{taskno,jdbcType=INTEGER},
+      PointNO = #{pointno,jdbcType=OTHER},
+      FlowSetVal = #{flowsetval,jdbcType=FLOAT},
+      CheckP = #{checkp,jdbcType=INTEGER}
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </update>
+</mapper>

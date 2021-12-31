@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniteddata.xqds.collector.dao.sqlserver.rfmsdb.BaseFlowmeterMapper">
+  <resultMap id="BaseResultMap" type="com.uniteddata.xqds.collector.entity.BaseFlowmeter">
+    <id column="FLOW_ID" jdbcType="VARCHAR" property="flowId" />
+    <result column="SELF_NUMBERING" jdbcType="VARCHAR" property="selfNumbering" />
+    <result column="CUST_ID" jdbcType="VARCHAR" property="custId" />
+    <result column="FLOW_TYPE" jdbcType="VARCHAR" property="flowType" />
+    <result column="SUBUNITS" jdbcType="VARCHAR" property="subunits" />
+    <result column="FLOW_NUMBER" jdbcType="VARCHAR" property="flowNumber" />
+    <result column="SPEC_VERSION" jdbcType="VARCHAR" property="specVersion" />
+    <result column="FLOW_CALIBER" jdbcType="VARCHAR" property="flowCaliber" />
+    <result column="ACCURACY_GRADE" jdbcType="VARCHAR" property="accuracyGrade" />
+    <result column="CLASSER" jdbcType="VARCHAR" property="classer" />
+    <result column="ACTUAL_INSIDE_DIAMETER" jdbcType="VARCHAR" property="actualInsideDiameter" />
+    <result column="FLOW_LENGTH" jdbcType="FLOAT" property="flowLength" />
+    <result column="K_COEFFICIENT" jdbcType="VARCHAR" property="kCoefficient" />
+    <result column="NOMINAL_FLOW" jdbcType="VARCHAR" property="nominalFlow" />
+    <result column="BEFORE_VER_TIME" jdbcType="DATE" property="beforeVerTime" />
+    <result column="PRODUCERS" jdbcType="VARCHAR" property="producers" />
+    <result column="USE_STATE" jdbcType="VARCHAR" property="useState" />
+    <result column="FLOW_SOURCE" jdbcType="VARCHAR" property="flowSource" />
+    <result column="BIRTH_TIME" jdbcType="DATE" property="birthTime" />
+    <result column="BSFLAG" jdbcType="VARCHAR" property="bsflag" />
+    <result column="DEMARCATION_FLOW" jdbcType="VARCHAR" property="demarcationFlow" />
+    <result column="VERIFI_STATE" jdbcType="VARCHAR" property="verifiState" />
+    <result column="VERIFI_FINISH_TIME" jdbcType="TIMESTAMP" property="verifiFinishTime" />
+    <result column="route_work_id" jdbcType="VARCHAR" property="routeWorkId" />
+    <result column="FLOW_OUTPUT_SIGNAL_TYPE" jdbcType="VARCHAR" property="flowOutputSignalType" />
+    <result column="MEASURING_PIPE_DIAMETER" jdbcType="VARCHAR" property="measuringPipeDiameter" />
+    <result column="MEASURING_TUBE_MATERIAL" jdbcType="VARCHAR" property="measuringTubeMaterial" />
+    <result column="HOLE_DIAMETER_OF_ORIFICE_PLATE" jdbcType="VARCHAR" property="holeDiameterOfOrificePlate" />
+    <result column="ORIFICE_PLATE_MATERIAL" jdbcType="VARCHAR" property="orificePlateMaterial" />
+    <result column="PRESSURE_EXTRACTION_MODE" jdbcType="VARCHAR" property="pressureExtractionMode" />
+    <result column="VER_SPOT_ALL" jdbcType="VARCHAR" property="verSpotAll" />
+    <result column="VER_NUMBER" jdbcType="INTEGER" property="verNumber" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    FLOW_ID, SELF_NUMBERING, CUST_ID, FLOW_TYPE, SUBUNITS, FLOW_NUMBER, SPEC_VERSION, 
+    FLOW_CALIBER, ACCURACY_GRADE, CLASSER, ACTUAL_INSIDE_DIAMETER, FLOW_LENGTH, K_COEFFICIENT, 
+    NOMINAL_FLOW, BEFORE_VER_TIME, PRODUCERS, USE_STATE, FLOW_SOURCE, BIRTH_TIME, BSFLAG, 
+    DEMARCATION_FLOW, VERIFI_STATE, VERIFI_FINISH_TIME, route_work_id, FLOW_OUTPUT_SIGNAL_TYPE, 
+    MEASURING_PIPE_DIAMETER, MEASURING_TUBE_MATERIAL, HOLE_DIAMETER_OF_ORIFICE_PLATE, 
+    ORIFICE_PLATE_MATERIAL, PRESSURE_EXTRACTION_MODE, VER_SPOT_ALL, VER_NUMBER
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from base_flowmeter
+    where FLOW_ID = #{flowId,jdbcType=VARCHAR}
+  </select>
+    <select id="selectBySelfNumbering" resultType="com.uniteddata.xqds.collector.entity.BaseFlowmeter">
+      select
+      <include refid="Base_Column_List" />
+       from base_flowmeter
+       where SELF_NUMBERING = #{demoNo}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from base_flowmeter
+    where FLOW_ID = #{flowId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="FLOW_ID" keyProperty="flowId" parameterType="com.uniteddata.xqds.collector.entity.BaseFlowmeter" useGeneratedKeys="true">
+    insert into base_flowmeter (SELF_NUMBERING, CUST_ID, FLOW_TYPE, 
+      SUBUNITS, FLOW_NUMBER, SPEC_VERSION, 
+      FLOW_CALIBER, ACCURACY_GRADE, CLASSER, 
+      ACTUAL_INSIDE_DIAMETER, FLOW_LENGTH, K_COEFFICIENT, 
+      NOMINAL_FLOW, BEFORE_VER_TIME, PRODUCERS, 
+      USE_STATE, FLOW_SOURCE, BIRTH_TIME, 
+      BSFLAG, DEMARCATION_FLOW, VERIFI_STATE, 
+      VERIFI_FINISH_TIME, route_work_id, FLOW_OUTPUT_SIGNAL_TYPE, 
+      MEASURING_PIPE_DIAMETER, MEASURING_TUBE_MATERIAL, 
+      HOLE_DIAMETER_OF_ORIFICE_PLATE, ORIFICE_PLATE_MATERIAL, 
+      PRESSURE_EXTRACTION_MODE, VER_SPOT_ALL, VER_NUMBER
+      )
+    values (#{selfNumbering,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR}, #{flowType,jdbcType=VARCHAR}, 
+      #{subunits,jdbcType=VARCHAR}, #{flowNumber,jdbcType=VARCHAR}, #{specVersion,jdbcType=VARCHAR}, 
+      #{flowCaliber,jdbcType=VARCHAR}, #{accuracyGrade,jdbcType=VARCHAR}, #{classer,jdbcType=VARCHAR}, 
+      #{actualInsideDiameter,jdbcType=VARCHAR}, #{flowLength,jdbcType=FLOAT}, #{kCoefficient,jdbcType=VARCHAR}, 
+      #{nominalFlow,jdbcType=VARCHAR}, #{beforeVerTime,jdbcType=DATE}, #{producers,jdbcType=VARCHAR}, 
+      #{useState,jdbcType=VARCHAR}, #{flowSource,jdbcType=VARCHAR}, #{birthTime,jdbcType=DATE}, 
+      #{bsflag,jdbcType=VARCHAR}, #{demarcationFlow,jdbcType=VARCHAR}, #{verifiState,jdbcType=VARCHAR}, 
+      #{verifiFinishTime,jdbcType=TIMESTAMP}, #{routeWorkId,jdbcType=VARCHAR}, #{flowOutputSignalType,jdbcType=VARCHAR}, 
+      #{measuringPipeDiameter,jdbcType=VARCHAR}, #{measuringTubeMaterial,jdbcType=VARCHAR}, 
+      #{holeDiameterOfOrificePlate,jdbcType=VARCHAR}, #{orificePlateMaterial,jdbcType=VARCHAR}, 
+      #{pressureExtractionMode,jdbcType=VARCHAR}, #{verSpotAll,jdbcType=VARCHAR}, #{verNumber,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="FLOW_ID" keyProperty="flowId" parameterType="com.uniteddata.xqds.collector.entity.BaseFlowmeter" useGeneratedKeys="true">
+    insert into base_flowmeter
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="selfNumbering != null">
+        SELF_NUMBERING,
+      </if>
+      <if test="custId != null">
+        CUST_ID,
+      </if>
+      <if test="flowType != null">
+        FLOW_TYPE,
+      </if>
+      <if test="subunits != null">
+        SUBUNITS,
+      </if>
+      <if test="flowNumber != null">
+        FLOW_NUMBER,
+      </if>
+      <if test="specVersion != null">
+        SPEC_VERSION,
+      </if>
+      <if test="flowCaliber != null">
+        FLOW_CALIBER,
+      </if>
+      <if test="accuracyGrade != null">
+        ACCURACY_GRADE,
+      </if>
+      <if test="classer != null">
+        CLASSER,
+      </if>
+      <if test="actualInsideDiameter != null">
+        ACTUAL_INSIDE_DIAMETER,
+      </if>
+      <if test="flowLength != null">
+        FLOW_LENGTH,
+      </if>
+      <if test="kCoefficient != null">
+        K_COEFFICIENT,
+      </if>
+      <if test="nominalFlow != null">
+        NOMINAL_FLOW,
+      </if>
+      <if test="beforeVerTime != null">
+        BEFORE_VER_TIME,
+      </if>
+      <if test="producers != null">
+        PRODUCERS,
+      </if>
+      <if test="useState != null">
+        USE_STATE,
+      </if>
+      <if test="flowSource != null">
+        FLOW_SOURCE,
+      </if>
+      <if test="birthTime != null">
+        BIRTH_TIME,
+      </if>
+      <if test="bsflag != null">
+        BSFLAG,
+      </if>
+      <if test="demarcationFlow != null">
+        DEMARCATION_FLOW,
+      </if>
+      <if test="verifiState != null">
+        VERIFI_STATE,
+      </if>
+      <if test="verifiFinishTime != null">
+        VERIFI_FINISH_TIME,
+      </if>
+      <if test="routeWorkId != null">
+        route_work_id,
+      </if>
+      <if test="flowOutputSignalType != null">
+        FLOW_OUTPUT_SIGNAL_TYPE,
+      </if>
+      <if test="measuringPipeDiameter != null">
+        MEASURING_PIPE_DIAMETER,
+      </if>
+      <if test="measuringTubeMaterial != null">
+        MEASURING_TUBE_MATERIAL,
+      </if>
+      <if test="holeDiameterOfOrificePlate != null">
+        HOLE_DIAMETER_OF_ORIFICE_PLATE,
+      </if>
+      <if test="orificePlateMaterial != null">
+        ORIFICE_PLATE_MATERIAL,
+      </if>
+      <if test="pressureExtractionMode != null">
+        PRESSURE_EXTRACTION_MODE,
+      </if>
+      <if test="verSpotAll != null">
+        VER_SPOT_ALL,
+      </if>
+      <if test="verNumber != null">
+        VER_NUMBER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="selfNumbering != null">
+        #{selfNumbering,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null">
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="flowType != null">
+        #{flowType,jdbcType=VARCHAR},
+      </if>
+      <if test="subunits != null">
+        #{subunits,jdbcType=VARCHAR},
+      </if>
+      <if test="flowNumber != null">
+        #{flowNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="specVersion != null">
+        #{specVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="flowCaliber != null">
+        #{flowCaliber,jdbcType=VARCHAR},
+      </if>
+      <if test="accuracyGrade != null">
+        #{accuracyGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="classer != null">
+        #{classer,jdbcType=VARCHAR},
+      </if>
+      <if test="actualInsideDiameter != null">
+        #{actualInsideDiameter,jdbcType=VARCHAR},
+      </if>
+      <if test="flowLength != null">
+        #{flowLength,jdbcType=FLOAT},
+      </if>
+      <if test="kCoefficient != null">
+        #{kCoefficient,jdbcType=VARCHAR},
+      </if>
+      <if test="nominalFlow != null">
+        #{nominalFlow,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeVerTime != null">
+        #{beforeVerTime,jdbcType=DATE},
+      </if>
+      <if test="producers != null">
+        #{producers,jdbcType=VARCHAR},
+      </if>
+      <if test="useState != null">
+        #{useState,jdbcType=VARCHAR},
+      </if>
+      <if test="flowSource != null">
+        #{flowSource,jdbcType=VARCHAR},
+      </if>
+      <if test="birthTime != null">
+        #{birthTime,jdbcType=DATE},
+      </if>
+      <if test="bsflag != null">
+        #{bsflag,jdbcType=VARCHAR},
+      </if>
+      <if test="demarcationFlow != null">
+        #{demarcationFlow,jdbcType=VARCHAR},
+      </if>
+      <if test="verifiState != null">
+        #{verifiState,jdbcType=VARCHAR},
+      </if>
+      <if test="verifiFinishTime != null">
+        #{verifiFinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="routeWorkId != null">
+        #{routeWorkId,jdbcType=VARCHAR},
+      </if>
+      <if test="flowOutputSignalType != null">
+        #{flowOutputSignalType,jdbcType=VARCHAR},
+      </if>
+      <if test="measuringPipeDiameter != null">
+        #{measuringPipeDiameter,jdbcType=VARCHAR},
+      </if>
+      <if test="measuringTubeMaterial != null">
+        #{measuringTubeMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="holeDiameterOfOrificePlate != null">
+        #{holeDiameterOfOrificePlate,jdbcType=VARCHAR},
+      </if>
+      <if test="orificePlateMaterial != null">
+        #{orificePlateMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="pressureExtractionMode != null">
+        #{pressureExtractionMode,jdbcType=VARCHAR},
+      </if>
+      <if test="verSpotAll != null">
+        #{verSpotAll,jdbcType=VARCHAR},
+      </if>
+      <if test="verNumber != null">
+        #{verNumber,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uniteddata.xqds.collector.entity.BaseFlowmeter">
+    update base_flowmeter
+    <set>
+      <if test="selfNumbering != null">
+        SELF_NUMBERING = #{selfNumbering,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null">
+        CUST_ID = #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="flowType != null">
+        FLOW_TYPE = #{flowType,jdbcType=VARCHAR},
+      </if>
+      <if test="subunits != null">
+        SUBUNITS = #{subunits,jdbcType=VARCHAR},
+      </if>
+      <if test="flowNumber != null">
+        FLOW_NUMBER = #{flowNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="specVersion != null">
+        SPEC_VERSION = #{specVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="flowCaliber != null">
+        FLOW_CALIBER = #{flowCaliber,jdbcType=VARCHAR},
+      </if>
+      <if test="accuracyGrade != null">
+        ACCURACY_GRADE = #{accuracyGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="classer != null">
+        CLASSER = #{classer,jdbcType=VARCHAR},
+      </if>
+      <if test="actualInsideDiameter != null">
+        ACTUAL_INSIDE_DIAMETER = #{actualInsideDiameter,jdbcType=VARCHAR},
+      </if>
+      <if test="flowLength != null">
+        FLOW_LENGTH = #{flowLength,jdbcType=FLOAT},
+      </if>
+      <if test="kCoefficient != null">
+        K_COEFFICIENT = #{kCoefficient,jdbcType=VARCHAR},
+      </if>
+      <if test="nominalFlow != null">
+        NOMINAL_FLOW = #{nominalFlow,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeVerTime != null">
+        BEFORE_VER_TIME = #{beforeVerTime,jdbcType=DATE},
+      </if>
+      <if test="producers != null">
+        PRODUCERS = #{producers,jdbcType=VARCHAR},
+      </if>
+      <if test="useState != null">
+        USE_STATE = #{useState,jdbcType=VARCHAR},
+      </if>
+      <if test="flowSource != null">
+        FLOW_SOURCE = #{flowSource,jdbcType=VARCHAR},
+      </if>
+      <if test="birthTime != null">
+        BIRTH_TIME = #{birthTime,jdbcType=DATE},
+      </if>
+      <if test="bsflag != null">
+        BSFLAG = #{bsflag,jdbcType=VARCHAR},
+      </if>
+      <if test="demarcationFlow != null">
+        DEMARCATION_FLOW = #{demarcationFlow,jdbcType=VARCHAR},
+      </if>
+      <if test="verifiState != null">
+        VERIFI_STATE = #{verifiState,jdbcType=VARCHAR},
+      </if>
+      <if test="verifiFinishTime != null">
+        VERIFI_FINISH_TIME = #{verifiFinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="routeWorkId != null">
+        route_work_id = #{routeWorkId,jdbcType=VARCHAR},
+      </if>
+      <if test="flowOutputSignalType != null">
+        FLOW_OUTPUT_SIGNAL_TYPE = #{flowOutputSignalType,jdbcType=VARCHAR},
+      </if>
+      <if test="measuringPipeDiameter != null">
+        MEASURING_PIPE_DIAMETER = #{measuringPipeDiameter,jdbcType=VARCHAR},
+      </if>
+      <if test="measuringTubeMaterial != null">
+        MEASURING_TUBE_MATERIAL = #{measuringTubeMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="holeDiameterOfOrificePlate != null">
+        HOLE_DIAMETER_OF_ORIFICE_PLATE = #{holeDiameterOfOrificePlate,jdbcType=VARCHAR},
+      </if>
+      <if test="orificePlateMaterial != null">
+        ORIFICE_PLATE_MATERIAL = #{orificePlateMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="pressureExtractionMode != null">
+        PRESSURE_EXTRACTION_MODE = #{pressureExtractionMode,jdbcType=VARCHAR},
+      </if>
+      <if test="verSpotAll != null">
+        VER_SPOT_ALL = #{verSpotAll,jdbcType=VARCHAR},
+      </if>
+      <if test="verNumber != null">
+        VER_NUMBER = #{verNumber,jdbcType=INTEGER},
+      </if>
+    </set>
+    where FLOW_ID = #{flowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uniteddata.xqds.collector.entity.BaseFlowmeter">
+    update base_flowmeter
+    set SELF_NUMBERING = #{selfNumbering,jdbcType=VARCHAR},
+      CUST_ID = #{custId,jdbcType=VARCHAR},
+      FLOW_TYPE = #{flowType,jdbcType=VARCHAR},
+      SUBUNITS = #{subunits,jdbcType=VARCHAR},
+      FLOW_NUMBER = #{flowNumber,jdbcType=VARCHAR},
+      SPEC_VERSION = #{specVersion,jdbcType=VARCHAR},
+      FLOW_CALIBER = #{flowCaliber,jdbcType=VARCHAR},
+      ACCURACY_GRADE = #{accuracyGrade,jdbcType=VARCHAR},
+      CLASSER = #{classer,jdbcType=VARCHAR},
+      ACTUAL_INSIDE_DIAMETER = #{actualInsideDiameter,jdbcType=VARCHAR},
+      FLOW_LENGTH = #{flowLength,jdbcType=FLOAT},
+      K_COEFFICIENT = #{kCoefficient,jdbcType=VARCHAR},
+      NOMINAL_FLOW = #{nominalFlow,jdbcType=VARCHAR},
+      BEFORE_VER_TIME = #{beforeVerTime,jdbcType=DATE},
+      PRODUCERS = #{producers,jdbcType=VARCHAR},
+      USE_STATE = #{useState,jdbcType=VARCHAR},
+      FLOW_SOURCE = #{flowSource,jdbcType=VARCHAR},
+      BIRTH_TIME = #{birthTime,jdbcType=DATE},
+      BSFLAG = #{bsflag,jdbcType=VARCHAR},
+      DEMARCATION_FLOW = #{demarcationFlow,jdbcType=VARCHAR},
+      VERIFI_STATE = #{verifiState,jdbcType=VARCHAR},
+      VERIFI_FINISH_TIME = #{verifiFinishTime,jdbcType=TIMESTAMP},
+      route_work_id = #{routeWorkId,jdbcType=VARCHAR},
+      FLOW_OUTPUT_SIGNAL_TYPE = #{flowOutputSignalType,jdbcType=VARCHAR},
+      MEASURING_PIPE_DIAMETER = #{measuringPipeDiameter,jdbcType=VARCHAR},
+      MEASURING_TUBE_MATERIAL = #{measuringTubeMaterial,jdbcType=VARCHAR},
+      HOLE_DIAMETER_OF_ORIFICE_PLATE = #{holeDiameterOfOrificePlate,jdbcType=VARCHAR},
+      ORIFICE_PLATE_MATERIAL = #{orificePlateMaterial,jdbcType=VARCHAR},
+      PRESSURE_EXTRACTION_MODE = #{pressureExtractionMode,jdbcType=VARCHAR},
+      VER_SPOT_ALL = #{verSpotAll,jdbcType=VARCHAR},
+      VER_NUMBER = #{verNumber,jdbcType=INTEGER}
+    where FLOW_ID = #{flowId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="DoaImp" class="com.xxx.doa.DoaImp">
+        <property name="name" value="张三"/>
+        <property name="age" value="24"/>
+<!--        value: 代表是普通数据类型注入-->
+    </bean>
+<!--    <bean id="ServiceImp" class="com.xxx.service.imp.UseServiceImp">-->
+<!--        &lt;!&ndash; 依赖注入，通过set方法 + property: 将需要依赖的对象(doa层)从spring容器内部注入到service(service层) &ndash;&gt;-->
+<!--        &lt;!&ndash;常规实现&ndash;&gt;-->
+<!--        <property name="doaImp" ref="DoaImp"/>-->
+<!--    </bean>-->
+        <!--p命名空间实现: 看起来是简短了一些，不过平时为了比较醒目还是采用上面那一种-->
+<!--    <bean id="ServiceImp" class="com.xxx.service.imp.UseServiceImp" p:doaImp-ref="DoaImp" />-->
+<!--    通过有参构造函数注入-->
+    <bean id="ServiceImp" class="com.xxx.service.imp.UseServiceImp" >
+        <constructor-arg name="doaImp" ref="DoaImp"></constructor-arg>
+<!--        其中ref代表: 引用数据类型注入-->
+    </bean>
+<!--    当项目比较大的时候需要划分模块，可以使用import导入其他模块的xml配置-->
+    <import resource="applicationContext-user.xml"/>
+</beans>

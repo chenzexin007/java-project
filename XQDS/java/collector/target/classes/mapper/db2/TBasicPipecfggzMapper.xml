@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniteddata.xqds.collector.dao.sqlserver.jddaq.TBasicPipecfggzMapper">
+  <resultMap id="BaseResultMap" type="com.uniteddata.xqds.collector.entity.TBasicPipecfggz">
+    <id column="PCfgNO" jdbcType="CHAR" property="pcfgno" />
+    <result column="PipNO" jdbcType="CHAR" property="pipno" />
+    <result column="FlowMin" jdbcType="FLOAT" property="flowmin" />
+    <result column="FlowMax" jdbcType="FLOAT" property="flowmax" />
+    <result column="PipeCfg" jdbcType="INTEGER" property="pipecfg" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PCfgNO, PipNO, FlowMin, FlowMax, PipeCfg
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_Basic_PipeCfgGZ
+    where PCfgNO = #{pcfgno,jdbcType=CHAR}
+  </select>
+    <select id="selectByPCfgNos" resultType="com.uniteddata.xqds.collector.entity.TBasicPipecfggz">
+      select * from T_Basic_PipeCfgGZ where PCfgNO in
+
+      <foreach item = "item" collection = "ids" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from T_Basic_PipeCfgGZ
+    where PCfgNO = #{pcfgno,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" keyColumn="PCfgNO" keyProperty="pcfgno" parameterType="com.uniteddata.xqds.collector.entity.TBasicPipecfggz" useGeneratedKeys="true">
+    insert into T_Basic_PipeCfgGZ (PipNO, FlowMin, FlowMax, 
+      PipeCfg)
+    values (#{pipno,jdbcType=CHAR}, #{flowmin,jdbcType=FLOAT}, #{flowmax,jdbcType=FLOAT}, 
+      #{pipecfg,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="PCfgNO" keyProperty="pcfgno" parameterType="com.uniteddata.xqds.collector.entity.TBasicPipecfggz" useGeneratedKeys="true">
+    insert into T_Basic_PipeCfgGZ
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pipno != null">
+        PipNO,
+      </if>
+      <if test="flowmin != null">
+        FlowMin,
+      </if>
+      <if test="flowmax != null">
+        FlowMax,
+      </if>
+      <if test="pipecfg != null">
+        PipeCfg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pipno != null">
+        #{pipno,jdbcType=CHAR},
+      </if>
+      <if test="flowmin != null">
+        #{flowmin,jdbcType=FLOAT},
+      </if>
+      <if test="flowmax != null">
+        #{flowmax,jdbcType=FLOAT},
+      </if>
+      <if test="pipecfg != null">
+        #{pipecfg,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uniteddata.xqds.collector.entity.TBasicPipecfggz">
+    update T_Basic_PipeCfgGZ
+    <set>
+      <if test="pipno != null">
+        PipNO = #{pipno,jdbcType=CHAR},
+      </if>
+      <if test="flowmin != null">
+        FlowMin = #{flowmin,jdbcType=FLOAT},
+      </if>
+      <if test="flowmax != null">
+        FlowMax = #{flowmax,jdbcType=FLOAT},
+      </if>
+      <if test="pipecfg != null">
+        PipeCfg = #{pipecfg,jdbcType=INTEGER},
+      </if>
+    </set>
+    where PCfgNO = #{pcfgno,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uniteddata.xqds.collector.entity.TBasicPipecfggz">
+    update T_Basic_PipeCfgGZ
+    set PipNO = #{pipno,jdbcType=CHAR},
+      FlowMin = #{flowmin,jdbcType=FLOAT},
+      FlowMax = #{flowmax,jdbcType=FLOAT},
+      PipeCfg = #{pipecfg,jdbcType=INTEGER}
+    where PCfgNO = #{pcfgno,jdbcType=CHAR}
+  </update>
+</mapper>

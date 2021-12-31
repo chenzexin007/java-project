@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zexin.dao.BookMapper">
+    <select id="selectBookById" parameterType="int" resultMap="Book">
+        select * from ssmdatabase.books where bookId = #{boolId}
+    </select>
+    <insert id="addBook" parameterType="Book">
+        insert into ssmdatabase.books (bookId,bookName,price)
+        values (#{bookId}, #{bookName}, #{price})
+    </insert>
+    <update id="updateBook" parameterType="Book">
+        update ssmdatabase.books
+        set bookId=#{bookId},bookName=#{bookName},price=#{price}
+        where bookId=#{bookId}
+    </update>
+    <delete id="deleteBookById" parameterType="int">
+        delete from ssmdatabase.books
+        where bookId=#{bookId}
+    </delete>
+    <select id="getAllBook" resultMap="Book">
+        select * from ssmdatabase.books
+    </select>
+</mapper>

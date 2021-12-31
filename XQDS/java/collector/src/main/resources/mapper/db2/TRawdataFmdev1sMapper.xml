@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniteddata.xqds.collector.dao.sqlserver.jddaq.TRawdataFmdev1sMapper">
+  <resultMap id="BaseResultMap" type="com.uniteddata.xqds.collector.entity.TRawdataFmdev1s">
+    <id column="RecNO" jdbcType="INTEGER" property="recno" />
+    <result column="SampNO" jdbcType="CHAR" property="sampno" />
+    <result column="PointNO" jdbcType="OTHER" property="pointno" />
+    <result column="PointSN" jdbcType="INTEGER" property="pointsn" />
+    <result column="TT" jdbcType="FLOAT" property="tt" />
+    <result column="PT" jdbcType="FLOAT" property="pt" />
+    <result column="FT" jdbcType="FLOAT" property="ft" />
+    <result column="SampTime" jdbcType="FLOAT" property="samptime" />
+    <result column="CompNO" jdbcType="CHAR" property="compno" />
+    <result column="DateTime" jdbcType="TIMESTAMP" property="datetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    RecNO, SampNO, PointNO, PointSN, TT, PT, FT, SampTime, CompNO, "DateTime"
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_RawData_FmDev1S
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from T_RawData_FmDev1S
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="RecNO" keyProperty="recno" parameterType="com.uniteddata.xqds.collector.entity.TRawdataFmdev1s" useGeneratedKeys="true">
+    insert into T_RawData_FmDev1S (SampNO, PointNO, PointSN, 
+      TT, PT, FT, SampTime, 
+      CompNO, "DateTime")
+    values (#{sampno,jdbcType=CHAR}, #{pointno,jdbcType=OTHER}, #{pointsn,jdbcType=INTEGER}, 
+      #{tt,jdbcType=FLOAT}, #{pt,jdbcType=FLOAT}, #{ft,jdbcType=FLOAT}, #{samptime,jdbcType=FLOAT}, 
+      #{compno,jdbcType=CHAR}, #{datetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="RecNO" keyProperty="recno" parameterType="com.uniteddata.xqds.collector.entity.TRawdataFmdev1s" useGeneratedKeys="true">
+    insert into T_RawData_FmDev1S
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sampno != null">
+        SampNO,
+      </if>
+      <if test="pointno != null">
+        PointNO,
+      </if>
+      <if test="pointsn != null">
+        PointSN,
+      </if>
+      <if test="tt != null">
+        TT,
+      </if>
+      <if test="pt != null">
+        PT,
+      </if>
+      <if test="ft != null">
+        FT,
+      </if>
+      <if test="samptime != null">
+        SampTime,
+      </if>
+      <if test="compno != null">
+        CompNO,
+      </if>
+      <if test="datetime != null">
+        "DateTime",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sampno != null">
+        #{sampno,jdbcType=CHAR},
+      </if>
+      <if test="pointno != null">
+        #{pointno,jdbcType=OTHER},
+      </if>
+      <if test="pointsn != null">
+        #{pointsn,jdbcType=INTEGER},
+      </if>
+      <if test="tt != null">
+        #{tt,jdbcType=FLOAT},
+      </if>
+      <if test="pt != null">
+        #{pt,jdbcType=FLOAT},
+      </if>
+      <if test="ft != null">
+        #{ft,jdbcType=FLOAT},
+      </if>
+      <if test="samptime != null">
+        #{samptime,jdbcType=FLOAT},
+      </if>
+      <if test="compno != null">
+        #{compno,jdbcType=CHAR},
+      </if>
+      <if test="datetime != null">
+        #{datetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uniteddata.xqds.collector.entity.TRawdataFmdev1s">
+    update T_RawData_FmDev1S
+    <set>
+      <if test="sampno != null">
+        SampNO = #{sampno,jdbcType=CHAR},
+      </if>
+      <if test="pointno != null">
+        PointNO = #{pointno,jdbcType=OTHER},
+      </if>
+      <if test="pointsn != null">
+        PointSN = #{pointsn,jdbcType=INTEGER},
+      </if>
+      <if test="tt != null">
+        TT = #{tt,jdbcType=FLOAT},
+      </if>
+      <if test="pt != null">
+        PT = #{pt,jdbcType=FLOAT},
+      </if>
+      <if test="ft != null">
+        FT = #{ft,jdbcType=FLOAT},
+      </if>
+      <if test="samptime != null">
+        SampTime = #{samptime,jdbcType=FLOAT},
+      </if>
+      <if test="compno != null">
+        CompNO = #{compno,jdbcType=CHAR},
+      </if>
+      <if test="datetime != null">
+        "DateTime" = #{datetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uniteddata.xqds.collector.entity.TRawdataFmdev1s">
+    update T_RawData_FmDev1S
+    set SampNO = #{sampno,jdbcType=CHAR},
+      PointNO = #{pointno,jdbcType=OTHER},
+      PointSN = #{pointsn,jdbcType=INTEGER},
+      TT = #{tt,jdbcType=FLOAT},
+      PT = #{pt,jdbcType=FLOAT},
+      FT = #{ft,jdbcType=FLOAT},
+      SampTime = #{samptime,jdbcType=FLOAT},
+      CompNO = #{compno,jdbcType=CHAR},
+      "DateTime" = #{datetime,jdbcType=TIMESTAMP}
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </update>
+</mapper>

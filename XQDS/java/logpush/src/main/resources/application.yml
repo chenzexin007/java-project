@@ -1,0 +1,20 @@
+server:
+  port: 18009
+
+spring:
+  application:
+    name: logpush
+
+#mybatis
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+xqds:
+  script:
+    log: D:\tmp\xqds_gzjlz\script\system\检定系统日记
+  schedule:
+    # webSocket 推送频率 0/30 * * * * ? 30秒 0 */5 * * * ? 5分钟
+    # 实时推送控制策略 3秒一次
+    strategyRate: 0/3 * * * * ?

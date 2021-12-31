@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniteddata.xqds.collector.dao.sqlserver.jddaq.TRawdataFmqmfMapper">
+  <resultMap id="BaseResultMap" type="com.uniteddata.xqds.collector.entity.TRawdataFmqmf">
+    <id column="RecNO" jdbcType="INTEGER" property="recno" />
+    <result column="SampNO" jdbcType="CHAR" property="sampno" />
+    <result column="FactoryNO" jdbcType="VARCHAR" property="factoryno" />
+    <result column="FlowPoint" jdbcType="NUMERIC" property="flowpoint" />
+    <result column="MFCoef" jdbcType="NUMERIC" property="mfcoef" />
+    <result column="KCoef" jdbcType="NUMERIC" property="kcoef" />
+    <result column="Error" jdbcType="NUMERIC" property="error" />
+    <result column="DataTime" jdbcType="TIMESTAMP" property="datatime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    RecNO, SampNO, FactoryNO, FlowPoint, MFCoef, KCoef, Error, DataTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_RawData_FmQMF
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </select>
+  <select id="selectBySampNo" resultType="com.uniteddata.xqds.collector.entity.TRawdataFmqmf">
+    select
+    <include refid="Base_Column_List"/>
+    from T_RawData_FmQMF
+    where SampNO = #{sampNo}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from T_RawData_FmQMF
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="RecNO" keyProperty="recno" parameterType="com.uniteddata.xqds.collector.entity.TRawdataFmqmf" useGeneratedKeys="true">
+    insert into T_RawData_FmQMF (SampNO, FactoryNO, FlowPoint, 
+      MFCoef, KCoef, Error, 
+      DataTime)
+    values (#{sampno,jdbcType=CHAR}, #{factoryno,jdbcType=VARCHAR}, #{flowpoint,jdbcType=NUMERIC}, 
+      #{mfcoef,jdbcType=NUMERIC}, #{kcoef,jdbcType=NUMERIC}, #{error,jdbcType=NUMERIC}, 
+      #{datatime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="RecNO" keyProperty="recno" parameterType="com.uniteddata.xqds.collector.entity.TRawdataFmqmf" useGeneratedKeys="true">
+    insert into T_RawData_FmQMF
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sampno != null">
+        SampNO,
+      </if>
+      <if test="factoryno != null">
+        FactoryNO,
+      </if>
+      <if test="flowpoint != null">
+        FlowPoint,
+      </if>
+      <if test="mfcoef != null">
+        MFCoef,
+      </if>
+      <if test="kcoef != null">
+        KCoef,
+      </if>
+      <if test="error != null">
+        Error,
+      </if>
+      <if test="datatime != null">
+        DataTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sampno != null">
+        #{sampno,jdbcType=CHAR},
+      </if>
+      <if test="factoryno != null">
+        #{factoryno,jdbcType=VARCHAR},
+      </if>
+      <if test="flowpoint != null">
+        #{flowpoint,jdbcType=NUMERIC},
+      </if>
+      <if test="mfcoef != null">
+        #{mfcoef,jdbcType=NUMERIC},
+      </if>
+      <if test="kcoef != null">
+        #{kcoef,jdbcType=NUMERIC},
+      </if>
+      <if test="error != null">
+        #{error,jdbcType=NUMERIC},
+      </if>
+      <if test="datatime != null">
+        #{datatime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uniteddata.xqds.collector.entity.TRawdataFmqmf">
+    update T_RawData_FmQMF
+    <set>
+      <if test="sampno != null">
+        SampNO = #{sampno,jdbcType=CHAR},
+      </if>
+      <if test="factoryno != null">
+        FactoryNO = #{factoryno,jdbcType=VARCHAR},
+      </if>
+      <if test="flowpoint != null">
+        FlowPoint = #{flowpoint,jdbcType=NUMERIC},
+      </if>
+      <if test="mfcoef != null">
+        MFCoef = #{mfcoef,jdbcType=NUMERIC},
+      </if>
+      <if test="kcoef != null">
+        KCoef = #{kcoef,jdbcType=NUMERIC},
+      </if>
+      <if test="error != null">
+        Error = #{error,jdbcType=NUMERIC},
+      </if>
+      <if test="datatime != null">
+        DataTime = #{datatime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uniteddata.xqds.collector.entity.TRawdataFmqmf">
+    update T_RawData_FmQMF
+    set SampNO = #{sampno,jdbcType=CHAR},
+      FactoryNO = #{factoryno,jdbcType=VARCHAR},
+      FlowPoint = #{flowpoint,jdbcType=NUMERIC},
+      MFCoef = #{mfcoef,jdbcType=NUMERIC},
+      KCoef = #{kcoef,jdbcType=NUMERIC},
+      Error = #{error,jdbcType=NUMERIC},
+      DataTime = #{datatime,jdbcType=TIMESTAMP}
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </update>
+</mapper>

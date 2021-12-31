@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniteddata.xqds.collector.dao.sqlserver.jddaq.TResultRecordfmMapper">
+  <resultMap id="BaseResultMap" type="com.uniteddata.xqds.collector.entity.TResultRecordfm">
+    <id column="RecNO" jdbcType="INTEGER" property="recno" />
+    <result column="SampNO" jdbcType="CHAR" property="sampno" />
+    <result column="PointNO" jdbcType="OTHER" property="pointno" />
+    <result column="PointSN" jdbcType="INTEGER" property="pointsn" />
+    <result column="Qf" jdbcType="FLOAT" property="qf" />
+    <result column="Qr" jdbcType="FLOAT" property="qr" />
+    <result column="Qmass" jdbcType="FLOAT" property="qmass" />
+    <result column="Qrmass" jdbcType="FLOAT" property="qrmass" />
+    <result column="Zf" jdbcType="FLOAT" property="zf" />
+    <result column="Error" jdbcType="FLOAT" property="error" />
+    <result column="MF" jdbcType="FLOAT" property="mf" />
+    <result column="Re" jdbcType="FLOAT" property="re" />
+    <result column="K" jdbcType="FLOAT" property="k" />
+    <result column="En" jdbcType="TINYINT" property="en" />
+    <result column="DateTime" jdbcType="TIMESTAMP" property="datetime" />
+    <result column="PT" jdbcType="FLOAT" property="pt" />
+    <result column="TT" jdbcType="FLOAT" property="tt" />
+    <result column="Rho" jdbcType="FLOAT" property="rho" />
+    <result column="CheckEn" jdbcType="INTEGER" property="checken" />
+    <result column="ValidFlag" jdbcType="INTEGER" property="validflag" />
+    <result column="TTFirst" jdbcType="FLOAT" property="ttfirst" />
+    <result column="TTMIN" jdbcType="FLOAT" property="ttmin" />
+    <result column="TTMAX" jdbcType="FLOAT" property="ttmax" />
+    <result column="PTFirst" jdbcType="FLOAT" property="ptfirst" />
+    <result column="PTMIN" jdbcType="FLOAT" property="ptmin" />
+    <result column="PTMAX" jdbcType="FLOAT" property="ptmax" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    RecNO, SampNO, PointNO, PointSN, Qf, Qr, Qmass, Qrmass, Zf, Error, MF, Re, "K", En, 
+    "DateTime", PT, TT, Rho, CheckEn, ValidFlag, TTFirst, TTMIN, TTMAX, PTFirst, PTMIN, 
+    PTMAX
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_Result_RecordFM
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPointNo" resultType="com.uniteddata.xqds.collector.entity.TResultRecordfm">
+    select
+    <include refid="Base_Column_List" />
+    from T_Result_RecordFM
+    where PointNO = #{pointNO}
+  </select>
+    <select id="selectBySampNo" resultType="com.uniteddata.xqds.collector.entity.TResultRecordfm">
+      select
+      <include refid="Base_Column_List" />
+      from T_Result_RecordFM
+      where SampNO = #{sampNo}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from T_Result_RecordFM
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="RecNO" keyProperty="recno" parameterType="com.uniteddata.xqds.collector.entity.TResultRecordfm" useGeneratedKeys="true">
+    insert into T_Result_RecordFM (SampNO, PointNO, PointSN, 
+      Qf, Qr, Qmass, Qrmass, 
+      Zf, Error, MF, Re, 
+      "K", En, "DateTime", PT, 
+      TT, Rho, CheckEn, ValidFlag, 
+      TTFirst, TTMIN, TTMAX, PTFirst, 
+      PTMIN, PTMAX)
+    values (#{sampno,jdbcType=CHAR}, #{pointno,jdbcType=OTHER}, #{pointsn,jdbcType=INTEGER}, 
+      #{qf,jdbcType=FLOAT}, #{qr,jdbcType=FLOAT}, #{qmass,jdbcType=FLOAT}, #{qrmass,jdbcType=FLOAT}, 
+      #{zf,jdbcType=FLOAT}, #{error,jdbcType=FLOAT}, #{mf,jdbcType=FLOAT}, #{re,jdbcType=FLOAT}, 
+      #{k,jdbcType=FLOAT}, #{en,jdbcType=TINYINT}, #{datetime,jdbcType=TIMESTAMP}, #{pt,jdbcType=FLOAT}, 
+      #{tt,jdbcType=FLOAT}, #{rho,jdbcType=FLOAT}, #{checken,jdbcType=INTEGER}, #{validflag,jdbcType=INTEGER}, 
+      #{ttfirst,jdbcType=FLOAT}, #{ttmin,jdbcType=FLOAT}, #{ttmax,jdbcType=FLOAT}, #{ptfirst,jdbcType=FLOAT}, 
+      #{ptmin,jdbcType=FLOAT}, #{ptmax,jdbcType=FLOAT})
+  </insert>
+  <insert id="insertSelective" keyColumn="RecNO" keyProperty="recno" parameterType="com.uniteddata.xqds.collector.entity.TResultRecordfm" useGeneratedKeys="true">
+    insert into T_Result_RecordFM
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sampno != null">
+        SampNO,
+      </if>
+      <if test="pointno != null">
+        PointNO,
+      </if>
+      <if test="pointsn != null">
+        PointSN,
+      </if>
+      <if test="qf != null">
+        Qf,
+      </if>
+      <if test="qr != null">
+        Qr,
+      </if>
+      <if test="qmass != null">
+        Qmass,
+      </if>
+      <if test="qrmass != null">
+        Qrmass,
+      </if>
+      <if test="zf != null">
+        Zf,
+      </if>
+      <if test="error != null">
+        Error,
+      </if>
+      <if test="mf != null">
+        MF,
+      </if>
+      <if test="re != null">
+        Re,
+      </if>
+      <if test="k != null">
+        "K",
+      </if>
+      <if test="en != null">
+        En,
+      </if>
+      <if test="datetime != null">
+        "DateTime",
+      </if>
+      <if test="pt != null">
+        PT,
+      </if>
+      <if test="tt != null">
+        TT,
+      </if>
+      <if test="rho != null">
+        Rho,
+      </if>
+      <if test="checken != null">
+        CheckEn,
+      </if>
+      <if test="validflag != null">
+        ValidFlag,
+      </if>
+      <if test="ttfirst != null">
+        TTFirst,
+      </if>
+      <if test="ttmin != null">
+        TTMIN,
+      </if>
+      <if test="ttmax != null">
+        TTMAX,
+      </if>
+      <if test="ptfirst != null">
+        PTFirst,
+      </if>
+      <if test="ptmin != null">
+        PTMIN,
+      </if>
+      <if test="ptmax != null">
+        PTMAX,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sampno != null">
+        #{sampno,jdbcType=CHAR},
+      </if>
+      <if test="pointno != null">
+        #{pointno,jdbcType=OTHER},
+      </if>
+      <if test="pointsn != null">
+        #{pointsn,jdbcType=INTEGER},
+      </if>
+      <if test="qf != null">
+        #{qf,jdbcType=FLOAT},
+      </if>
+      <if test="qr != null">
+        #{qr,jdbcType=FLOAT},
+      </if>
+      <if test="qmass != null">
+        #{qmass,jdbcType=FLOAT},
+      </if>
+      <if test="qrmass != null">
+        #{qrmass,jdbcType=FLOAT},
+      </if>
+      <if test="zf != null">
+        #{zf,jdbcType=FLOAT},
+      </if>
+      <if test="error != null">
+        #{error,jdbcType=FLOAT},
+      </if>
+      <if test="mf != null">
+        #{mf,jdbcType=FLOAT},
+      </if>
+      <if test="re != null">
+        #{re,jdbcType=FLOAT},
+      </if>
+      <if test="k != null">
+        #{k,jdbcType=FLOAT},
+      </if>
+      <if test="en != null">
+        #{en,jdbcType=TINYINT},
+      </if>
+      <if test="datetime != null">
+        #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pt != null">
+        #{pt,jdbcType=FLOAT},
+      </if>
+      <if test="tt != null">
+        #{tt,jdbcType=FLOAT},
+      </if>
+      <if test="rho != null">
+        #{rho,jdbcType=FLOAT},
+      </if>
+      <if test="checken != null">
+        #{checken,jdbcType=INTEGER},
+      </if>
+      <if test="validflag != null">
+        #{validflag,jdbcType=INTEGER},
+      </if>
+      <if test="ttfirst != null">
+        #{ttfirst,jdbcType=FLOAT},
+      </if>
+      <if test="ttmin != null">
+        #{ttmin,jdbcType=FLOAT},
+      </if>
+      <if test="ttmax != null">
+        #{ttmax,jdbcType=FLOAT},
+      </if>
+      <if test="ptfirst != null">
+        #{ptfirst,jdbcType=FLOAT},
+      </if>
+      <if test="ptmin != null">
+        #{ptmin,jdbcType=FLOAT},
+      </if>
+      <if test="ptmax != null">
+        #{ptmax,jdbcType=FLOAT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uniteddata.xqds.collector.entity.TResultRecordfm">
+    update T_Result_RecordFM
+    <set>
+      <if test="sampno != null">
+        SampNO = #{sampno,jdbcType=CHAR},
+      </if>
+      <if test="pointno != null">
+        PointNO = #{pointno,jdbcType=OTHER},
+      </if>
+      <if test="pointsn != null">
+        PointSN = #{pointsn,jdbcType=INTEGER},
+      </if>
+      <if test="qf != null">
+        Qf = #{qf,jdbcType=FLOAT},
+      </if>
+      <if test="qr != null">
+        Qr = #{qr,jdbcType=FLOAT},
+      </if>
+      <if test="qmass != null">
+        Qmass = #{qmass,jdbcType=FLOAT},
+      </if>
+      <if test="qrmass != null">
+        Qrmass = #{qrmass,jdbcType=FLOAT},
+      </if>
+      <if test="zf != null">
+        Zf = #{zf,jdbcType=FLOAT},
+      </if>
+      <if test="error != null">
+        Error = #{error,jdbcType=FLOAT},
+      </if>
+      <if test="mf != null">
+        MF = #{mf,jdbcType=FLOAT},
+      </if>
+      <if test="re != null">
+        Re = #{re,jdbcType=FLOAT},
+      </if>
+      <if test="k != null">
+        "K" = #{k,jdbcType=FLOAT},
+      </if>
+      <if test="en != null">
+        En = #{en,jdbcType=TINYINT},
+      </if>
+      <if test="datetime != null">
+        "DateTime" = #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pt != null">
+        PT = #{pt,jdbcType=FLOAT},
+      </if>
+      <if test="tt != null">
+        TT = #{tt,jdbcType=FLOAT},
+      </if>
+      <if test="rho != null">
+        Rho = #{rho,jdbcType=FLOAT},
+      </if>
+      <if test="checken != null">
+        CheckEn = #{checken,jdbcType=INTEGER},
+      </if>
+      <if test="validflag != null">
+        ValidFlag = #{validflag,jdbcType=INTEGER},
+      </if>
+      <if test="ttfirst != null">
+        TTFirst = #{ttfirst,jdbcType=FLOAT},
+      </if>
+      <if test="ttmin != null">
+        TTMIN = #{ttmin,jdbcType=FLOAT},
+      </if>
+      <if test="ttmax != null">
+        TTMAX = #{ttmax,jdbcType=FLOAT},
+      </if>
+      <if test="ptfirst != null">
+        PTFirst = #{ptfirst,jdbcType=FLOAT},
+      </if>
+      <if test="ptmin != null">
+        PTMIN = #{ptmin,jdbcType=FLOAT},
+      </if>
+      <if test="ptmax != null">
+        PTMAX = #{ptmax,jdbcType=FLOAT},
+      </if>
+    </set>
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uniteddata.xqds.collector.entity.TResultRecordfm">
+    update T_Result_RecordFM
+    set SampNO = #{sampno,jdbcType=CHAR},
+      PointNO = #{pointno,jdbcType=OTHER},
+      PointSN = #{pointsn,jdbcType=INTEGER},
+      Qf = #{qf,jdbcType=FLOAT},
+      Qr = #{qr,jdbcType=FLOAT},
+      Qmass = #{qmass,jdbcType=FLOAT},
+      Qrmass = #{qrmass,jdbcType=FLOAT},
+      Zf = #{zf,jdbcType=FLOAT},
+      Error = #{error,jdbcType=FLOAT},
+      MF = #{mf,jdbcType=FLOAT},
+      Re = #{re,jdbcType=FLOAT},
+      "K" = #{k,jdbcType=FLOAT},
+      En = #{en,jdbcType=TINYINT},
+      "DateTime" = #{datetime,jdbcType=TIMESTAMP},
+      PT = #{pt,jdbcType=FLOAT},
+      TT = #{tt,jdbcType=FLOAT},
+      Rho = #{rho,jdbcType=FLOAT},
+      CheckEn = #{checken,jdbcType=INTEGER},
+      ValidFlag = #{validflag,jdbcType=INTEGER},
+      TTFirst = #{ttfirst,jdbcType=FLOAT},
+      TTMIN = #{ttmin,jdbcType=FLOAT},
+      TTMAX = #{ttmax,jdbcType=FLOAT},
+      PTFirst = #{ptfirst,jdbcType=FLOAT},
+      PTMIN = #{ptmin,jdbcType=FLOAT},
+      PTMAX = #{ptmax,jdbcType=FLOAT}
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </update>
+</mapper>

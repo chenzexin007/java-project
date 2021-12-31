@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniteddata.xqds.collector.dao.sqlserver.rfmsdb.BaseCodingSortDetailMapper">
+  <resultMap id="BaseResultMap" type="com.uniteddata.xqds.collector.entity.BaseCodingSortDetail">
+    <id column="coding_code_id" jdbcType="VARCHAR" property="codingCodeId" />
+    <result column="entity_id" jdbcType="VARCHAR" property="entityId" />
+    <result column="bsflag" jdbcType="VARCHAR" property="bsflag" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="customer_id" jdbcType="VARCHAR" property="customerId" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="update_user_id" jdbcType="VARCHAR" property="updateUserId" />
+    <result column="cite_if" jdbcType="VARCHAR" property="citeIf" />
+    <result column="coding_abbreviation" jdbcType="VARCHAR" property="codingAbbreviation" />
+    <result column="coding_code" jdbcType="VARCHAR" property="codingCode" />
+    <result column="coding_en_Name" jdbcType="VARCHAR" property="codingEnName" />
+    <result column="coding_es_Name" jdbcType="VARCHAR" property="codingEsName" />
+    <result column="coding_fr_Name" jdbcType="VARCHAR" property="codingFrName" />
+    <result column="coding_mnemonic_id" jdbcType="VARCHAR" property="codingMnemonicId" />
+    <result column="coding_name" jdbcType="VARCHAR" property="codingName" />
+    <result column="coding_ru_Name" jdbcType="VARCHAR" property="codingRuName" />
+    <result column="coding_show_id" jdbcType="INTEGER" property="codingShowId" />
+    <result column="coding_sort_id" jdbcType="VARCHAR" property="codingSortId" />
+    <result column="edition_nameplate" jdbcType="INTEGER" property="editionNameplate" />
+    <result column="end_if" jdbcType="VARCHAR" property="endIf" />
+    <result column="locked_if" jdbcType="VARCHAR" property="lockedIf" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="superior_code_id" jdbcType="VARCHAR" property="superiorCodeId" />
+    <result column="used_names" jdbcType="VARCHAR" property="usedNames" />
+    <result column="belong_org_id" jdbcType="VARCHAR" property="belongOrgId" />
+    <result column="create_org_id" jdbcType="VARCHAR" property="createOrgId" />
+    <result column="update_org_id" jdbcType="VARCHAR" property="updateOrgId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    coding_code_id, entity_id, bsflag, create_date, create_user_id, customer_id, update_date, 
+    update_user_id, cite_if, coding_abbreviation, coding_code, coding_en_Name, coding_es_Name, 
+    coding_fr_Name, coding_mnemonic_id, coding_name, coding_ru_Name, coding_show_id, 
+    coding_sort_id, edition_nameplate, end_if, locked_if, note, superior_code_id, used_names, 
+    belong_org_id, create_org_id, update_org_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from base_coding_sort_detail
+    where coding_code_id = #{codingCodeId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByIds" resultType="com.uniteddata.xqds.collector.entity.BaseCodingSortDetail">
+    select * from base_coding_sort_detail where coding_code_id in
+
+    <foreach item = "item" collection = "ids" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from base_coding_sort_detail
+    where coding_code_id = #{codingCodeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="coding_code_id" keyProperty="codingCodeId" parameterType="com.uniteddata.xqds.collector.entity.BaseCodingSortDetail" useGeneratedKeys="true">
+    insert into base_coding_sort_detail (entity_id, bsflag, create_date, 
+      create_user_id, customer_id, update_date, 
+      update_user_id, cite_if, coding_abbreviation, 
+      coding_code, coding_en_Name, coding_es_Name, 
+      coding_fr_Name, coding_mnemonic_id, coding_name, 
+      coding_ru_Name, coding_show_id, coding_sort_id, 
+      edition_nameplate, end_if, locked_if, 
+      note, superior_code_id, used_names, 
+      belong_org_id, create_org_id, update_org_id
+      )
+    values (#{entityId,jdbcType=VARCHAR}, #{bsflag,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{createUserId,jdbcType=VARCHAR}, #{customerId,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=VARCHAR}, #{citeIf,jdbcType=VARCHAR}, #{codingAbbreviation,jdbcType=VARCHAR}, 
+      #{codingCode,jdbcType=VARCHAR}, #{codingEnName,jdbcType=VARCHAR}, #{codingEsName,jdbcType=VARCHAR}, 
+      #{codingFrName,jdbcType=VARCHAR}, #{codingMnemonicId,jdbcType=VARCHAR}, #{codingName,jdbcType=VARCHAR}, 
+      #{codingRuName,jdbcType=VARCHAR}, #{codingShowId,jdbcType=INTEGER}, #{codingSortId,jdbcType=VARCHAR}, 
+      #{editionNameplate,jdbcType=INTEGER}, #{endIf,jdbcType=VARCHAR}, #{lockedIf,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR}, #{superiorCodeId,jdbcType=VARCHAR}, #{usedNames,jdbcType=VARCHAR}, 
+      #{belongOrgId,jdbcType=VARCHAR}, #{createOrgId,jdbcType=VARCHAR}, #{updateOrgId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="coding_code_id" keyProperty="codingCodeId" parameterType="com.uniteddata.xqds.collector.entity.BaseCodingSortDetail" useGeneratedKeys="true">
+    insert into base_coding_sort_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="entityId != null">
+        entity_id,
+      </if>
+      <if test="bsflag != null">
+        bsflag,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="citeIf != null">
+        cite_if,
+      </if>
+      <if test="codingAbbreviation != null">
+        coding_abbreviation,
+      </if>
+      <if test="codingCode != null">
+        coding_code,
+      </if>
+      <if test="codingEnName != null">
+        coding_en_Name,
+      </if>
+      <if test="codingEsName != null">
+        coding_es_Name,
+      </if>
+      <if test="codingFrName != null">
+        coding_fr_Name,
+      </if>
+      <if test="codingMnemonicId != null">
+        coding_mnemonic_id,
+      </if>
+      <if test="codingName != null">
+        coding_name,
+      </if>
+      <if test="codingRuName != null">
+        coding_ru_Name,
+      </if>
+      <if test="codingShowId != null">
+        coding_show_id,
+      </if>
+      <if test="codingSortId != null">
+        coding_sort_id,
+      </if>
+      <if test="editionNameplate != null">
+        edition_nameplate,
+      </if>
+      <if test="endIf != null">
+        end_if,
+      </if>
+      <if test="lockedIf != null">
+        locked_if,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="superiorCodeId != null">
+        superior_code_id,
+      </if>
+      <if test="usedNames != null">
+        used_names,
+      </if>
+      <if test="belongOrgId != null">
+        belong_org_id,
+      </if>
+      <if test="createOrgId != null">
+        create_org_id,
+      </if>
+      <if test="updateOrgId != null">
+        update_org_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="entityId != null">
+        #{entityId,jdbcType=VARCHAR},
+      </if>
+      <if test="bsflag != null">
+        #{bsflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="citeIf != null">
+        #{citeIf,jdbcType=VARCHAR},
+      </if>
+      <if test="codingAbbreviation != null">
+        #{codingAbbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="codingCode != null">
+        #{codingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="codingEnName != null">
+        #{codingEnName,jdbcType=VARCHAR},
+      </if>
+      <if test="codingEsName != null">
+        #{codingEsName,jdbcType=VARCHAR},
+      </if>
+      <if test="codingFrName != null">
+        #{codingFrName,jdbcType=VARCHAR},
+      </if>
+      <if test="codingMnemonicId != null">
+        #{codingMnemonicId,jdbcType=VARCHAR},
+      </if>
+      <if test="codingName != null">
+        #{codingName,jdbcType=VARCHAR},
+      </if>
+      <if test="codingRuName != null">
+        #{codingRuName,jdbcType=VARCHAR},
+      </if>
+      <if test="codingShowId != null">
+        #{codingShowId,jdbcType=INTEGER},
+      </if>
+      <if test="codingSortId != null">
+        #{codingSortId,jdbcType=VARCHAR},
+      </if>
+      <if test="editionNameplate != null">
+        #{editionNameplate,jdbcType=INTEGER},
+      </if>
+      <if test="endIf != null">
+        #{endIf,jdbcType=VARCHAR},
+      </if>
+      <if test="lockedIf != null">
+        #{lockedIf,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="superiorCodeId != null">
+        #{superiorCodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="usedNames != null">
+        #{usedNames,jdbcType=VARCHAR},
+      </if>
+      <if test="belongOrgId != null">
+        #{belongOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="createOrgId != null">
+        #{createOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateOrgId != null">
+        #{updateOrgId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uniteddata.xqds.collector.entity.BaseCodingSortDetail">
+    update base_coding_sort_detail
+    <set>
+      <if test="entityId != null">
+        entity_id = #{entityId,jdbcType=VARCHAR},
+      </if>
+      <if test="bsflag != null">
+        bsflag = #{bsflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="citeIf != null">
+        cite_if = #{citeIf,jdbcType=VARCHAR},
+      </if>
+      <if test="codingAbbreviation != null">
+        coding_abbreviation = #{codingAbbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="codingCode != null">
+        coding_code = #{codingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="codingEnName != null">
+        coding_en_Name = #{codingEnName,jdbcType=VARCHAR},
+      </if>
+      <if test="codingEsName != null">
+        coding_es_Name = #{codingEsName,jdbcType=VARCHAR},
+      </if>
+      <if test="codingFrName != null">
+        coding_fr_Name = #{codingFrName,jdbcType=VARCHAR},
+      </if>
+      <if test="codingMnemonicId != null">
+        coding_mnemonic_id = #{codingMnemonicId,jdbcType=VARCHAR},
+      </if>
+      <if test="codingName != null">
+        coding_name = #{codingName,jdbcType=VARCHAR},
+      </if>
+      <if test="codingRuName != null">
+        coding_ru_Name = #{codingRuName,jdbcType=VARCHAR},
+      </if>
+      <if test="codingShowId != null">
+        coding_show_id = #{codingShowId,jdbcType=INTEGER},
+      </if>
+      <if test="codingSortId != null">
+        coding_sort_id = #{codingSortId,jdbcType=VARCHAR},
+      </if>
+      <if test="editionNameplate != null">
+        edition_nameplate = #{editionNameplate,jdbcType=INTEGER},
+      </if>
+      <if test="endIf != null">
+        end_if = #{endIf,jdbcType=VARCHAR},
+      </if>
+      <if test="lockedIf != null">
+        locked_if = #{lockedIf,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="superiorCodeId != null">
+        superior_code_id = #{superiorCodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="usedNames != null">
+        used_names = #{usedNames,jdbcType=VARCHAR},
+      </if>
+      <if test="belongOrgId != null">
+        belong_org_id = #{belongOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="createOrgId != null">
+        create_org_id = #{createOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateOrgId != null">
+        update_org_id = #{updateOrgId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where coding_code_id = #{codingCodeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uniteddata.xqds.collector.entity.BaseCodingSortDetail">
+    update base_coding_sort_detail
+    set entity_id = #{entityId,jdbcType=VARCHAR},
+      bsflag = #{bsflag,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      customer_id = #{customerId,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      cite_if = #{citeIf,jdbcType=VARCHAR},
+      coding_abbreviation = #{codingAbbreviation,jdbcType=VARCHAR},
+      coding_code = #{codingCode,jdbcType=VARCHAR},
+      coding_en_Name = #{codingEnName,jdbcType=VARCHAR},
+      coding_es_Name = #{codingEsName,jdbcType=VARCHAR},
+      coding_fr_Name = #{codingFrName,jdbcType=VARCHAR},
+      coding_mnemonic_id = #{codingMnemonicId,jdbcType=VARCHAR},
+      coding_name = #{codingName,jdbcType=VARCHAR},
+      coding_ru_Name = #{codingRuName,jdbcType=VARCHAR},
+      coding_show_id = #{codingShowId,jdbcType=INTEGER},
+      coding_sort_id = #{codingSortId,jdbcType=VARCHAR},
+      edition_nameplate = #{editionNameplate,jdbcType=INTEGER},
+      end_if = #{endIf,jdbcType=VARCHAR},
+      locked_if = #{lockedIf,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      superior_code_id = #{superiorCodeId,jdbcType=VARCHAR},
+      used_names = #{usedNames,jdbcType=VARCHAR},
+      belong_org_id = #{belongOrgId,jdbcType=VARCHAR},
+      create_org_id = #{createOrgId,jdbcType=VARCHAR},
+      update_org_id = #{updateOrgId,jdbcType=VARCHAR}
+    where coding_code_id = #{codingCodeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniteddata.xqds.collector.dao.mysql.SampStationMapper">
+  <resultMap id="BaseResultMap" type="com.uniteddata.xqds.collector.entity.SampStation">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="samp" jdbcType="VARCHAR" property="samp" />
+    <result column="station" jdbcType="VARCHAR" property="station" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, samp, station
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from samp_station
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from samp_station
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.uniteddata.xqds.collector.entity.SampStation" useGeneratedKeys="true">
+    insert into samp_station (samp, station)
+    values (#{samp,jdbcType=VARCHAR}, #{station,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.uniteddata.xqds.collector.entity.SampStation" useGeneratedKeys="true">
+    insert into samp_station
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="samp != null">
+        samp,
+      </if>
+      <if test="station != null">
+        station,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="samp != null">
+        #{samp,jdbcType=VARCHAR},
+      </if>
+      <if test="station != null">
+        #{station,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uniteddata.xqds.collector.entity.SampStation">
+    update samp_station
+    <set>
+      <if test="samp != null">
+        samp = #{samp,jdbcType=VARCHAR},
+      </if>
+      <if test="station != null">
+        station = #{station,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uniteddata.xqds.collector.entity.SampStation">
+    update samp_station
+    set samp = #{samp,jdbcType=VARCHAR},
+      station = #{station,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniteddata.xqds.collector.dao.sqlserver.rfmsdb.TRawdataStddevMapper">
+  <resultMap id="BaseResultMap" type="com.uniteddata.xqds.collector.entity.TRawdataStddev">
+    <id column="RecNO" jdbcType="INTEGER" property="recno" />
+    <result column="TagNO" jdbcType="CHAR" property="tagno" />
+    <result column="PointNO" jdbcType="OTHER" property="pointno" />
+    <result column="PointSN" jdbcType="TINYINT" property="pointsn" />
+    <result column="TT" jdbcType="FLOAT" property="tt" />
+    <result column="PT" jdbcType="FLOAT" property="pt" />
+    <result column="FT" jdbcType="FLOAT" property="ft" />
+    <result column="DateTime" jdbcType="TIMESTAMP" property="datetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    RecNO, TagNO, PointNO, PointSN, TT, PT, FT, "DateTime"
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_RawData_StdDev
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from T_RawData_StdDev
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="RecNO" keyProperty="recno" parameterType="com.uniteddata.xqds.collector.entity.TRawdataStddev" useGeneratedKeys="true">
+    insert into T_RawData_StdDev (TagNO, PointNO, PointSN, 
+      TT, PT, FT, "DateTime"
+      )
+    values (#{tagno,jdbcType=CHAR}, #{pointno,jdbcType=OTHER}, #{pointsn,jdbcType=TINYINT}, 
+      #{tt,jdbcType=FLOAT}, #{pt,jdbcType=FLOAT}, #{ft,jdbcType=FLOAT}, #{datetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="RecNO" keyProperty="recno" parameterType="com.uniteddata.xqds.collector.entity.TRawdataStddev" useGeneratedKeys="true">
+    insert into T_RawData_StdDev
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tagno != null">
+        TagNO,
+      </if>
+      <if test="pointno != null">
+        PointNO,
+      </if>
+      <if test="pointsn != null">
+        PointSN,
+      </if>
+      <if test="tt != null">
+        TT,
+      </if>
+      <if test="pt != null">
+        PT,
+      </if>
+      <if test="ft != null">
+        FT,
+      </if>
+      <if test="datetime != null">
+        "DateTime",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tagno != null">
+        #{tagno,jdbcType=CHAR},
+      </if>
+      <if test="pointno != null">
+        #{pointno,jdbcType=OTHER},
+      </if>
+      <if test="pointsn != null">
+        #{pointsn,jdbcType=TINYINT},
+      </if>
+      <if test="tt != null">
+        #{tt,jdbcType=FLOAT},
+      </if>
+      <if test="pt != null">
+        #{pt,jdbcType=FLOAT},
+      </if>
+      <if test="ft != null">
+        #{ft,jdbcType=FLOAT},
+      </if>
+      <if test="datetime != null">
+        #{datetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uniteddata.xqds.collector.entity.TRawdataStddev">
+    update T_RawData_StdDev
+    <set>
+      <if test="tagno != null">
+        TagNO = #{tagno,jdbcType=CHAR},
+      </if>
+      <if test="pointno != null">
+        PointNO = #{pointno,jdbcType=OTHER},
+      </if>
+      <if test="pointsn != null">
+        PointSN = #{pointsn,jdbcType=TINYINT},
+      </if>
+      <if test="tt != null">
+        TT = #{tt,jdbcType=FLOAT},
+      </if>
+      <if test="pt != null">
+        PT = #{pt,jdbcType=FLOAT},
+      </if>
+      <if test="ft != null">
+        FT = #{ft,jdbcType=FLOAT},
+      </if>
+      <if test="datetime != null">
+        "DateTime" = #{datetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uniteddata.xqds.collector.entity.TRawdataStddev">
+    update T_RawData_StdDev
+    set TagNO = #{tagno,jdbcType=CHAR},
+      PointNO = #{pointno,jdbcType=OTHER},
+      PointSN = #{pointsn,jdbcType=TINYINT},
+      TT = #{tt,jdbcType=FLOAT},
+      PT = #{pt,jdbcType=FLOAT},
+      FT = #{ft,jdbcType=FLOAT},
+      "DateTime" = #{datetime,jdbcType=TIMESTAMP}
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </update>
+</mapper>

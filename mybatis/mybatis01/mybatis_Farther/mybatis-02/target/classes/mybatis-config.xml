@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--    mybatis配置文件，工具类通过读取这个配置文件，获取指定配置的SqlSession对象，该对象下有所有的操作数据库的api -->
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.zexin.pojo.Student" alias="student"></typeAlias>
+        <typeAlias type="com.zexin.pojo.Teacher" alias="teacher"></typeAlias>
+    </typeAliases>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/jdbctemplate?useSSL=false&amp;serverTimezone=GMT%2B8&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+<!--        每个mapper对应一个-->
+        <mapper resource="./StudentMapper.xml"/>
+    </mappers>
+</configuration>

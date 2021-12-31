@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniteddata.xqds.collector.dao.sqlserver.jddaq.TResultReportMapper">
+  <resultMap id="BaseResultMap" type="com.uniteddata.xqds.collector.entity.TResultReport">
+    <id column="RecNO" jdbcType="INTEGER" property="recno" />
+    <result column="SampNO" jdbcType="CHAR" property="sampno" />
+    <result column="PointNO" jdbcType="OTHER" property="pointno" />
+    <result column="Qf" jdbcType="FLOAT" property="qf" />
+    <result column="Qr" jdbcType="FLOAT" property="qr" />
+    <result column="PT" jdbcType="FLOAT" property="pt" />
+    <result column="TT" jdbcType="FLOAT" property="tt" />
+    <result column="FT" jdbcType="FLOAT" property="ft" />
+    <result column="Re" jdbcType="FLOAT" property="re" />
+    <result column="Error" jdbcType="FLOAT" property="error" />
+    <result column="MF" jdbcType="FLOAT" property="mf" />
+    <result column="K" jdbcType="FLOAT" property="k" />
+    <result column="Repeability" jdbcType="FLOAT" property="repeability" />
+    <result column="Uncertainty" jdbcType="FLOAT" property="uncertainty" />
+    <result column="DateTime" jdbcType="TIMESTAMP" property="datetime" />
+    <result column="ValidFlag" jdbcType="INTEGER" property="validflag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    RecNO, SampNO, PointNO, Qf, Qr, PT, TT, FT, Re, Error, MF, "K", Repeability, Uncertainty, 
+    "DateTime", ValidFlag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_Result_Report
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </select>
+  <select id="selectLastWithSize" resultType="com.uniteddata.xqds.collector.entity.TResultReport">
+    select top ${size}
+    <include refid="Base_Column_List" />
+    from T_Result_Report
+    order by RecNO desc
+  </select>
+  <select id="selectBySampNo" resultType="com.uniteddata.xqds.collector.entity.TResultReport">
+    select
+    <include refid="Base_Column_List" />
+    from T_Result_Report
+    where SampNO = #{sampNO}
+    order by RecNO desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from T_Result_Report
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="RecNO" keyProperty="recno" parameterType="com.uniteddata.xqds.collector.entity.TResultReport" useGeneratedKeys="true">
+    insert into T_Result_Report (SampNO, PointNO, Qf, 
+      Qr, PT, TT, FT, 
+      Re, Error, MF, "K", 
+      Repeability, Uncertainty, "DateTime", 
+      ValidFlag)
+    values (#{sampno,jdbcType=CHAR}, #{pointno,jdbcType=OTHER}, #{qf,jdbcType=FLOAT}, 
+      #{qr,jdbcType=FLOAT}, #{pt,jdbcType=FLOAT}, #{tt,jdbcType=FLOAT}, #{ft,jdbcType=FLOAT}, 
+      #{re,jdbcType=FLOAT}, #{error,jdbcType=FLOAT}, #{mf,jdbcType=FLOAT}, #{k,jdbcType=FLOAT}, 
+      #{repeability,jdbcType=FLOAT}, #{uncertainty,jdbcType=FLOAT}, #{datetime,jdbcType=TIMESTAMP}, 
+      #{validflag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="RecNO" keyProperty="recno" parameterType="com.uniteddata.xqds.collector.entity.TResultReport" useGeneratedKeys="true">
+    insert into T_Result_Report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sampno != null">
+        SampNO,
+      </if>
+      <if test="pointno != null">
+        PointNO,
+      </if>
+      <if test="qf != null">
+        Qf,
+      </if>
+      <if test="qr != null">
+        Qr,
+      </if>
+      <if test="pt != null">
+        PT,
+      </if>
+      <if test="tt != null">
+        TT,
+      </if>
+      <if test="ft != null">
+        FT,
+      </if>
+      <if test="re != null">
+        Re,
+      </if>
+      <if test="error != null">
+        Error,
+      </if>
+      <if test="mf != null">
+        MF,
+      </if>
+      <if test="k != null">
+        "K",
+      </if>
+      <if test="repeability != null">
+        Repeability,
+      </if>
+      <if test="uncertainty != null">
+        Uncertainty,
+      </if>
+      <if test="datetime != null">
+        "DateTime",
+      </if>
+      <if test="validflag != null">
+        ValidFlag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sampno != null">
+        #{sampno,jdbcType=CHAR},
+      </if>
+      <if test="pointno != null">
+        #{pointno,jdbcType=OTHER},
+      </if>
+      <if test="qf != null">
+        #{qf,jdbcType=FLOAT},
+      </if>
+      <if test="qr != null">
+        #{qr,jdbcType=FLOAT},
+      </if>
+      <if test="pt != null">
+        #{pt,jdbcType=FLOAT},
+      </if>
+      <if test="tt != null">
+        #{tt,jdbcType=FLOAT},
+      </if>
+      <if test="ft != null">
+        #{ft,jdbcType=FLOAT},
+      </if>
+      <if test="re != null">
+        #{re,jdbcType=FLOAT},
+      </if>
+      <if test="error != null">
+        #{error,jdbcType=FLOAT},
+      </if>
+      <if test="mf != null">
+        #{mf,jdbcType=FLOAT},
+      </if>
+      <if test="k != null">
+        #{k,jdbcType=FLOAT},
+      </if>
+      <if test="repeability != null">
+        #{repeability,jdbcType=FLOAT},
+      </if>
+      <if test="uncertainty != null">
+        #{uncertainty,jdbcType=FLOAT},
+      </if>
+      <if test="datetime != null">
+        #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validflag != null">
+        #{validflag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uniteddata.xqds.collector.entity.TResultReport">
+    update T_Result_Report
+    <set>
+      <if test="sampno != null">
+        SampNO = #{sampno,jdbcType=CHAR},
+      </if>
+      <if test="pointno != null">
+        PointNO = #{pointno,jdbcType=OTHER},
+      </if>
+      <if test="qf != null">
+        Qf = #{qf,jdbcType=FLOAT},
+      </if>
+      <if test="qr != null">
+        Qr = #{qr,jdbcType=FLOAT},
+      </if>
+      <if test="pt != null">
+        PT = #{pt,jdbcType=FLOAT},
+      </if>
+      <if test="tt != null">
+        TT = #{tt,jdbcType=FLOAT},
+      </if>
+      <if test="ft != null">
+        FT = #{ft,jdbcType=FLOAT},
+      </if>
+      <if test="re != null">
+        Re = #{re,jdbcType=FLOAT},
+      </if>
+      <if test="error != null">
+        Error = #{error,jdbcType=FLOAT},
+      </if>
+      <if test="mf != null">
+        MF = #{mf,jdbcType=FLOAT},
+      </if>
+      <if test="k != null">
+        "K" = #{k,jdbcType=FLOAT},
+      </if>
+      <if test="repeability != null">
+        Repeability = #{repeability,jdbcType=FLOAT},
+      </if>
+      <if test="uncertainty != null">
+        Uncertainty = #{uncertainty,jdbcType=FLOAT},
+      </if>
+      <if test="datetime != null">
+        "DateTime" = #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validflag != null">
+        ValidFlag = #{validflag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uniteddata.xqds.collector.entity.TResultReport">
+    update T_Result_Report
+    set SampNO = #{sampno,jdbcType=CHAR},
+      PointNO = #{pointno,jdbcType=OTHER},
+      Qf = #{qf,jdbcType=FLOAT},
+      Qr = #{qr,jdbcType=FLOAT},
+      PT = #{pt,jdbcType=FLOAT},
+      TT = #{tt,jdbcType=FLOAT},
+      FT = #{ft,jdbcType=FLOAT},
+      Re = #{re,jdbcType=FLOAT},
+      Error = #{error,jdbcType=FLOAT},
+      MF = #{mf,jdbcType=FLOAT},
+      "K" = #{k,jdbcType=FLOAT},
+      Repeability = #{repeability,jdbcType=FLOAT},
+      Uncertainty = #{uncertainty,jdbcType=FLOAT},
+      "DateTime" = #{datetime,jdbcType=TIMESTAMP},
+      ValidFlag = #{validflag,jdbcType=INTEGER}
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </update>
+</mapper>

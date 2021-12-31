@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniteddata.xqds.collector.dao.sqlserver.jddaq.TRawdataFmdevMapper">
+    <resultMap id="BaseResultMap" type="com.uniteddata.xqds.collector.entity.TRawdataFmdev">
+        <id column="RecNO" jdbcType="INTEGER" property="recno" />
+        <result column="SampNO" jdbcType="CHAR" property="sampno" />
+        <result column="PointNO" jdbcType="OTHER" property="pointno" />
+        <result column="PointSN" jdbcType="TINYINT" property="pointsn" />
+        <result column="TT" jdbcType="FLOAT" property="tt" />
+        <result column="PT" jdbcType="FLOAT" property="pt" />
+        <result column="FT" jdbcType="FLOAT" property="ft" />
+        <result column="SampTime" jdbcType="FLOAT" property="samptime" />
+        <result column="CompNO" jdbcType="CHAR" property="compno" />
+        <result column="DevNO" jdbcType="TINYINT" property="devno" />
+        <result column="DateTime" jdbcType="TIMESTAMP" property="datetime" />
+        <result column="TTFirst" jdbcType="FLOAT" property="ttfirst" />
+        <result column="TTMIN" jdbcType="FLOAT" property="ttmin" />
+        <result column="TTMAX" jdbcType="FLOAT" property="ttmax" />
+        <result column="PTFirst" jdbcType="FLOAT" property="ptfirst" />
+        <result column="PTMIN" jdbcType="FLOAT" property="ptmin" />
+        <result column="PTMAX" jdbcType="FLOAT" property="ptmax" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    RecNO, SampNO, PointNO, PointSN, TT, PT, FT, SampTime, CompNO, DevNO, "DateTime",
+    TTFirst, TTMIN, TTMAX, PTFirst, PTMIN, PTMAX
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from T_RawData_FmDev
+        where RecNO = #{recno,jdbcType=INTEGER}
+    </select>
+    <select id="selectByPointNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from T_RawData_FmDev
+        where PointNO = #{pointNo,jdbcType=OTHER}
+    </select>
+    <select id="selectBySampNo" resultType="com.uniteddata.xqds.collector.entity.TRawdataFmdev">
+        select
+        <include refid="Base_Column_List" />
+        from T_RawData_FmDev
+        where SampNO = #{sampNo}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from T_RawData_FmDev
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="RecNO" keyProperty="recno" parameterType="com.uniteddata.xqds.collector.entity.TRawdataFmdev" useGeneratedKeys="true">
+    insert into T_RawData_FmDev (SampNO, PointNO, PointSN,
+      TT, PT, FT, SampTime,
+      CompNO, DevNO, "DateTime",
+      TTFirst, TTMIN, TTMAX, PTFirst,
+      PTMIN, PTMAX)
+    values (#{sampno,jdbcType=CHAR}, #{pointno,jdbcType=OTHER}, #{pointsn,jdbcType=TINYINT},
+      #{tt,jdbcType=FLOAT}, #{pt,jdbcType=FLOAT}, #{ft,jdbcType=FLOAT}, #{samptime,jdbcType=FLOAT},
+      #{compno,jdbcType=CHAR}, #{devno,jdbcType=TINYINT}, #{datetime,jdbcType=TIMESTAMP},
+      #{ttfirst,jdbcType=FLOAT}, #{ttmin,jdbcType=FLOAT}, #{ttmax,jdbcType=FLOAT}, #{ptfirst,jdbcType=FLOAT},
+      #{ptmin,jdbcType=FLOAT}, #{ptmax,jdbcType=FLOAT})
+  </insert>
+    <insert id="insertSelective" keyColumn="RecNO" keyProperty="recno" parameterType="com.uniteddata.xqds.collector.entity.TRawdataFmdev" useGeneratedKeys="true">
+        insert into T_RawData_FmDev
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sampno != null">
+                SampNO,
+            </if>
+            <if test="pointno != null">
+                PointNO,
+            </if>
+            <if test="pointsn != null">
+                PointSN,
+            </if>
+            <if test="tt != null">
+                TT,
+            </if>
+            <if test="pt != null">
+                PT,
+            </if>
+            <if test="ft != null">
+                FT,
+            </if>
+            <if test="samptime != null">
+                SampTime,
+            </if>
+            <if test="compno != null">
+                CompNO,
+            </if>
+            <if test="devno != null">
+                DevNO,
+            </if>
+            <if test="datetime != null">
+                "DateTime",
+            </if>
+            <if test="ttfirst != null">
+                TTFirst,
+            </if>
+            <if test="ttmin != null">
+                TTMIN,
+            </if>
+            <if test="ttmax != null">
+                TTMAX,
+            </if>
+            <if test="ptfirst != null">
+                PTFirst,
+            </if>
+            <if test="ptmin != null">
+                PTMIN,
+            </if>
+            <if test="ptmax != null">
+                PTMAX,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sampno != null">
+                #{sampno,jdbcType=CHAR},
+            </if>
+            <if test="pointno != null">
+                #{pointno,jdbcType=OTHER},
+            </if>
+            <if test="pointsn != null">
+                #{pointsn,jdbcType=TINYINT},
+            </if>
+            <if test="tt != null">
+                #{tt,jdbcType=FLOAT},
+            </if>
+            <if test="pt != null">
+                #{pt,jdbcType=FLOAT},
+            </if>
+            <if test="ft != null">
+                #{ft,jdbcType=FLOAT},
+            </if>
+            <if test="samptime != null">
+                #{samptime,jdbcType=FLOAT},
+            </if>
+            <if test="compno != null">
+                #{compno,jdbcType=CHAR},
+            </if>
+            <if test="devno != null">
+                #{devno,jdbcType=TINYINT},
+            </if>
+            <if test="datetime != null">
+                #{datetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ttfirst != null">
+                #{ttfirst,jdbcType=FLOAT},
+            </if>
+            <if test="ttmin != null">
+                #{ttmin,jdbcType=FLOAT},
+            </if>
+            <if test="ttmax != null">
+                #{ttmax,jdbcType=FLOAT},
+            </if>
+            <if test="ptfirst != null">
+                #{ptfirst,jdbcType=FLOAT},
+            </if>
+            <if test="ptmin != null">
+                #{ptmin,jdbcType=FLOAT},
+            </if>
+            <if test="ptmax != null">
+                #{ptmax,jdbcType=FLOAT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.uniteddata.xqds.collector.entity.TRawdataFmdev">
+        update T_RawData_FmDev
+        <set>
+            <if test="sampno != null">
+                SampNO = #{sampno,jdbcType=CHAR},
+            </if>
+            <if test="pointno != null">
+                PointNO = #{pointno,jdbcType=OTHER},
+            </if>
+            <if test="pointsn != null">
+                PointSN = #{pointsn,jdbcType=TINYINT},
+            </if>
+            <if test="tt != null">
+                TT = #{tt,jdbcType=FLOAT},
+            </if>
+            <if test="pt != null">
+                PT = #{pt,jdbcType=FLOAT},
+            </if>
+            <if test="ft != null">
+                FT = #{ft,jdbcType=FLOAT},
+            </if>
+            <if test="samptime != null">
+                SampTime = #{samptime,jdbcType=FLOAT},
+            </if>
+            <if test="compno != null">
+                CompNO = #{compno,jdbcType=CHAR},
+            </if>
+            <if test="devno != null">
+                DevNO = #{devno,jdbcType=TINYINT},
+            </if>
+            <if test="datetime != null">
+                "DateTime" = #{datetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ttfirst != null">
+                TTFirst = #{ttfirst,jdbcType=FLOAT},
+            </if>
+            <if test="ttmin != null">
+                TTMIN = #{ttmin,jdbcType=FLOAT},
+            </if>
+            <if test="ttmax != null">
+                TTMAX = #{ttmax,jdbcType=FLOAT},
+            </if>
+            <if test="ptfirst != null">
+                PTFirst = #{ptfirst,jdbcType=FLOAT},
+            </if>
+            <if test="ptmin != null">
+                PTMIN = #{ptmin,jdbcType=FLOAT},
+            </if>
+            <if test="ptmax != null">
+                PTMAX = #{ptmax,jdbcType=FLOAT},
+            </if>
+        </set>
+        where RecNO = #{recno,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.uniteddata.xqds.collector.entity.TRawdataFmdev">
+    update T_RawData_FmDev
+    set SampNO = #{sampno,jdbcType=CHAR},
+      PointNO = #{pointno,jdbcType=OTHER},
+      PointSN = #{pointsn,jdbcType=TINYINT},
+      TT = #{tt,jdbcType=FLOAT},
+      PT = #{pt,jdbcType=FLOAT},
+      FT = #{ft,jdbcType=FLOAT},
+      SampTime = #{samptime,jdbcType=FLOAT},
+      CompNO = #{compno,jdbcType=CHAR},
+      DevNO = #{devno,jdbcType=TINYINT},
+      "DateTime" = #{datetime,jdbcType=TIMESTAMP},
+      TTFirst = #{ttfirst,jdbcType=FLOAT},
+      TTMIN = #{ttmin,jdbcType=FLOAT},
+      TTMAX = #{ttmax,jdbcType=FLOAT},
+      PTFirst = #{ptfirst,jdbcType=FLOAT},
+      PTMIN = #{ptmin,jdbcType=FLOAT},
+      PTMAX = #{ptmax,jdbcType=FLOAT}
+    where RecNO = #{recno,jdbcType=INTEGER}
+  </update>
+</mapper>

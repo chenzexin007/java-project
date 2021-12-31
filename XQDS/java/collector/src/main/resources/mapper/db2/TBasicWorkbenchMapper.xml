@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniteddata.xqds.collector.dao.sqlserver.jddaq.TBasicWorkbenchMapper">
+  <resultMap id="BaseResultMap" type="com.uniteddata.xqds.collector.entity.TBasicWorkbench">
+    <id column="TagNO" jdbcType="CHAR" property="tagno" />
+    <result column="PipeNO" jdbcType="TINYINT" property="pipeno" />
+    <result column="TT1" jdbcType="CHAR" property="tt1" />
+    <result column="PT1" jdbcType="CHAR" property="pt1" />
+    <result column="PT2" jdbcType="CHAR" property="pt2" />
+    <result column="PT3" jdbcType="CHAR" property="pt3" />
+    <result column="PU1" jdbcType="CHAR" property="pu1" />
+    <result column="PU2" jdbcType="CHAR" property="pu2" />
+    <result column="PU3" jdbcType="CHAR" property="pu3" />
+    <result column="AI1" jdbcType="CHAR" property="ai1" />
+    <result column="AI2" jdbcType="CHAR" property="ai2" />
+    <result column="AI3" jdbcType="CHAR" property="ai3" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    TagNO, PipeNO, TT1, PT1, PT2, PT3, PU1, PU2, PU3, AI1, AI2, AI3
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_Basic_WorkBench
+    where TagNO = #{tagno,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from T_Basic_WorkBench
+    where TagNO = #{tagno,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" keyColumn="TagNO" keyProperty="tagno" parameterType="com.uniteddata.xqds.collector.entity.TBasicWorkbench" useGeneratedKeys="true">
+    insert into T_Basic_WorkBench (PipeNO, TT1, PT1, PT2, 
+      PT3, PU1, PU2, PU3, 
+      AI1, AI2, AI3)
+    values (#{pipeno,jdbcType=TINYINT}, #{tt1,jdbcType=CHAR}, #{pt1,jdbcType=CHAR}, #{pt2,jdbcType=CHAR}, 
+      #{pt3,jdbcType=CHAR}, #{pu1,jdbcType=CHAR}, #{pu2,jdbcType=CHAR}, #{pu3,jdbcType=CHAR}, 
+      #{ai1,jdbcType=CHAR}, #{ai2,jdbcType=CHAR}, #{ai3,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="TagNO" keyProperty="tagno" parameterType="com.uniteddata.xqds.collector.entity.TBasicWorkbench" useGeneratedKeys="true">
+    insert into T_Basic_WorkBench
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pipeno != null">
+        PipeNO,
+      </if>
+      <if test="tt1 != null">
+        TT1,
+      </if>
+      <if test="pt1 != null">
+        PT1,
+      </if>
+      <if test="pt2 != null">
+        PT2,
+      </if>
+      <if test="pt3 != null">
+        PT3,
+      </if>
+      <if test="pu1 != null">
+        PU1,
+      </if>
+      <if test="pu2 != null">
+        PU2,
+      </if>
+      <if test="pu3 != null">
+        PU3,
+      </if>
+      <if test="ai1 != null">
+        AI1,
+      </if>
+      <if test="ai2 != null">
+        AI2,
+      </if>
+      <if test="ai3 != null">
+        AI3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pipeno != null">
+        #{pipeno,jdbcType=TINYINT},
+      </if>
+      <if test="tt1 != null">
+        #{tt1,jdbcType=CHAR},
+      </if>
+      <if test="pt1 != null">
+        #{pt1,jdbcType=CHAR},
+      </if>
+      <if test="pt2 != null">
+        #{pt2,jdbcType=CHAR},
+      </if>
+      <if test="pt3 != null">
+        #{pt3,jdbcType=CHAR},
+      </if>
+      <if test="pu1 != null">
+        #{pu1,jdbcType=CHAR},
+      </if>
+      <if test="pu2 != null">
+        #{pu2,jdbcType=CHAR},
+      </if>
+      <if test="pu3 != null">
+        #{pu3,jdbcType=CHAR},
+      </if>
+      <if test="ai1 != null">
+        #{ai1,jdbcType=CHAR},
+      </if>
+      <if test="ai2 != null">
+        #{ai2,jdbcType=CHAR},
+      </if>
+      <if test="ai3 != null">
+        #{ai3,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uniteddata.xqds.collector.entity.TBasicWorkbench">
+    update T_Basic_WorkBench
+    <set>
+      <if test="pipeno != null">
+        PipeNO = #{pipeno,jdbcType=TINYINT},
+      </if>
+      <if test="tt1 != null">
+        TT1 = #{tt1,jdbcType=CHAR},
+      </if>
+      <if test="pt1 != null">
+        PT1 = #{pt1,jdbcType=CHAR},
+      </if>
+      <if test="pt2 != null">
+        PT2 = #{pt2,jdbcType=CHAR},
+      </if>
+      <if test="pt3 != null">
+        PT3 = #{pt3,jdbcType=CHAR},
+      </if>
+      <if test="pu1 != null">
+        PU1 = #{pu1,jdbcType=CHAR},
+      </if>
+      <if test="pu2 != null">
+        PU2 = #{pu2,jdbcType=CHAR},
+      </if>
+      <if test="pu3 != null">
+        PU3 = #{pu3,jdbcType=CHAR},
+      </if>
+      <if test="ai1 != null">
+        AI1 = #{ai1,jdbcType=CHAR},
+      </if>
+      <if test="ai2 != null">
+        AI2 = #{ai2,jdbcType=CHAR},
+      </if>
+      <if test="ai3 != null">
+        AI3 = #{ai3,jdbcType=CHAR},
+      </if>
+    </set>
+    where TagNO = #{tagno,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uniteddata.xqds.collector.entity.TBasicWorkbench">
+    update T_Basic_WorkBench
+    set PipeNO = #{pipeno,jdbcType=TINYINT},
+      TT1 = #{tt1,jdbcType=CHAR},
+      PT1 = #{pt1,jdbcType=CHAR},
+      PT2 = #{pt2,jdbcType=CHAR},
+      PT3 = #{pt3,jdbcType=CHAR},
+      PU1 = #{pu1,jdbcType=CHAR},
+      PU2 = #{pu2,jdbcType=CHAR},
+      PU3 = #{pu3,jdbcType=CHAR},
+      AI1 = #{ai1,jdbcType=CHAR},
+      AI2 = #{ai2,jdbcType=CHAR},
+      AI3 = #{ai3,jdbcType=CHAR}
+    where TagNO = #{tagno,jdbcType=CHAR}
+  </update>
+</mapper>

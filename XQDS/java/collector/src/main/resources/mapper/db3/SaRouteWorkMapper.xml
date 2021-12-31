@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniteddata.xqds.collector.dao.sqlserver.rfmsdb.SaRouteWorkMapper">
+  <resultMap id="BaseResultMap" type="com.uniteddata.xqds.collector.entity.SaRouteWork">
+    <id column="route_work_id" jdbcType="VARCHAR" property="routeWorkId" />
+    <result column="work_type_id" jdbcType="VARCHAR" property="workTypeId" />
+    <result column="work_type_name" jdbcType="VARCHAR" property="workTypeName" />
+    <result column="work_date" jdbcType="TIMESTAMP" property="workDate" />
+    <result column="work_site" jdbcType="VARCHAR" property="workSite" />
+    <result column="work_desc" jdbcType="VARCHAR" property="workDesc" />
+    <result column="work_status" jdbcType="VARCHAR" property="workStatus" />
+    <result column="if_new_work" jdbcType="CHAR" property="ifNewWork" />
+    <result column="release_user_id" jdbcType="VARCHAR" property="releaseUserId" />
+    <result column="release_user_name" jdbcType="VARCHAR" property="releaseUserName" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="create_date" jdbcType="DATE" property="createDate" />
+    <result column="bsflag" jdbcType="VARCHAR" property="bsflag" />
+    <result column="flowmeter_number" jdbcType="VARCHAR" property="flowmeterNumber" />
+    <result column="work_end_time" jdbcType="TIMESTAMP" property="workEndTime" />
+    <result column="work_class" jdbcType="VARCHAR" property="workClass" />
+    <result column="operate_user_id" jdbcType="VARCHAR" property="operateUserId" />
+    <result column="guardian_user_id" jdbcType="VARCHAR" property="guardianUserId" />
+    <result column="work_org_id" jdbcType="VARCHAR" property="workOrgId" />
+    <result column="gztaskid" jdbcType="INTEGER" property="gztaskid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    route_work_id, work_type_id, work_type_name, work_date, work_site, work_desc, work_status, 
+    if_new_work, release_user_id, release_user_name, create_user_id, create_date, bsflag, 
+    flowmeter_number, work_end_time, work_class, operate_user_id, guardian_user_id, work_org_id, 
+    gztaskid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sa_route_work
+    where route_work_id = #{routeWorkId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByTaskNo" resultType="com.uniteddata.xqds.collector.entity.SaRouteWork">
+    select <include refid="Base_Column_List" />
+    from sa_route_work
+    where gztaskid = #{taskno}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sa_route_work
+    where route_work_id = #{routeWorkId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="route_work_id" keyProperty="routeWorkId" parameterType="com.uniteddata.xqds.collector.entity.SaRouteWork" useGeneratedKeys="true">
+    insert into sa_route_work (work_type_id, work_type_name, work_date, 
+      work_site, work_desc, work_status, 
+      if_new_work, release_user_id, release_user_name, 
+      create_user_id, create_date, bsflag, 
+      flowmeter_number, work_end_time, work_class, 
+      operate_user_id, guardian_user_id, work_org_id, 
+      gztaskid)
+    values (#{workTypeId,jdbcType=VARCHAR}, #{workTypeName,jdbcType=VARCHAR}, #{workDate,jdbcType=TIMESTAMP}, 
+      #{workSite,jdbcType=VARCHAR}, #{workDesc,jdbcType=VARCHAR}, #{workStatus,jdbcType=VARCHAR}, 
+      #{ifNewWork,jdbcType=CHAR}, #{releaseUserId,jdbcType=VARCHAR}, #{releaseUserName,jdbcType=VARCHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}, #{bsflag,jdbcType=VARCHAR}, 
+      #{flowmeterNumber,jdbcType=VARCHAR}, #{workEndTime,jdbcType=TIMESTAMP}, #{workClass,jdbcType=VARCHAR}, 
+      #{operateUserId,jdbcType=VARCHAR}, #{guardianUserId,jdbcType=VARCHAR}, #{workOrgId,jdbcType=VARCHAR}, 
+      #{gztaskid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="route_work_id" keyProperty="routeWorkId" parameterType="com.uniteddata.xqds.collector.entity.SaRouteWork" useGeneratedKeys="true">
+    insert into sa_route_work
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="workTypeId != null">
+        work_type_id,
+      </if>
+      <if test="workTypeName != null">
+        work_type_name,
+      </if>
+      <if test="workDate != null">
+        work_date,
+      </if>
+      <if test="workSite != null">
+        work_site,
+      </if>
+      <if test="workDesc != null">
+        work_desc,
+      </if>
+      <if test="workStatus != null">
+        work_status,
+      </if>
+      <if test="ifNewWork != null">
+        if_new_work,
+      </if>
+      <if test="releaseUserId != null">
+        release_user_id,
+      </if>
+      <if test="releaseUserName != null">
+        release_user_name,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="bsflag != null">
+        bsflag,
+      </if>
+      <if test="flowmeterNumber != null">
+        flowmeter_number,
+      </if>
+      <if test="workEndTime != null">
+        work_end_time,
+      </if>
+      <if test="workClass != null">
+        work_class,
+      </if>
+      <if test="operateUserId != null">
+        operate_user_id,
+      </if>
+      <if test="guardianUserId != null">
+        guardian_user_id,
+      </if>
+      <if test="workOrgId != null">
+        work_org_id,
+      </if>
+      <if test="gztaskid != null">
+        gztaskid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="workTypeId != null">
+        #{workTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="workTypeName != null">
+        #{workTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="workDate != null">
+        #{workDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="workSite != null">
+        #{workSite,jdbcType=VARCHAR},
+      </if>
+      <if test="workDesc != null">
+        #{workDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="workStatus != null">
+        #{workStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="ifNewWork != null">
+        #{ifNewWork,jdbcType=CHAR},
+      </if>
+      <if test="releaseUserId != null">
+        #{releaseUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseUserName != null">
+        #{releaseUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="bsflag != null">
+        #{bsflag,jdbcType=VARCHAR},
+      </if>
+      <if test="flowmeterNumber != null">
+        #{flowmeterNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="workEndTime != null">
+        #{workEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="workClass != null">
+        #{workClass,jdbcType=VARCHAR},
+      </if>
+      <if test="operateUserId != null">
+        #{operateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="guardianUserId != null">
+        #{guardianUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="workOrgId != null">
+        #{workOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="gztaskid != null">
+        #{gztaskid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uniteddata.xqds.collector.entity.SaRouteWork">
+    update sa_route_work
+    <set>
+      <if test="workTypeId != null">
+        work_type_id = #{workTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="workTypeName != null">
+        work_type_name = #{workTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="workDate != null">
+        work_date = #{workDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="workSite != null">
+        work_site = #{workSite,jdbcType=VARCHAR},
+      </if>
+      <if test="workDesc != null">
+        work_desc = #{workDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="workStatus != null">
+        work_status = #{workStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="ifNewWork != null">
+        if_new_work = #{ifNewWork,jdbcType=CHAR},
+      </if>
+      <if test="releaseUserId != null">
+        release_user_id = #{releaseUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseUserName != null">
+        release_user_name = #{releaseUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="bsflag != null">
+        bsflag = #{bsflag,jdbcType=VARCHAR},
+      </if>
+      <if test="flowmeterNumber != null">
+        flowmeter_number = #{flowmeterNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="workEndTime != null">
+        work_end_time = #{workEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="workClass != null">
+        work_class = #{workClass,jdbcType=VARCHAR},
+      </if>
+      <if test="operateUserId != null">
+        operate_user_id = #{operateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="guardianUserId != null">
+        guardian_user_id = #{guardianUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="workOrgId != null">
+        work_org_id = #{workOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="gztaskid != null">
+        gztaskid = #{gztaskid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where route_work_id = #{routeWorkId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uniteddata.xqds.collector.entity.SaRouteWork">
+    update sa_route_work
+    set work_type_id = #{workTypeId,jdbcType=VARCHAR},
+      work_type_name = #{workTypeName,jdbcType=VARCHAR},
+      work_date = #{workDate,jdbcType=TIMESTAMP},
+      work_site = #{workSite,jdbcType=VARCHAR},
+      work_desc = #{workDesc,jdbcType=VARCHAR},
+      work_status = #{workStatus,jdbcType=VARCHAR},
+      if_new_work = #{ifNewWork,jdbcType=CHAR},
+      release_user_id = #{releaseUserId,jdbcType=VARCHAR},
+      release_user_name = #{releaseUserName,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=DATE},
+      bsflag = #{bsflag,jdbcType=VARCHAR},
+      flowmeter_number = #{flowmeterNumber,jdbcType=VARCHAR},
+      work_end_time = #{workEndTime,jdbcType=TIMESTAMP},
+      work_class = #{workClass,jdbcType=VARCHAR},
+      operate_user_id = #{operateUserId,jdbcType=VARCHAR},
+      guardian_user_id = #{guardianUserId,jdbcType=VARCHAR},
+      work_org_id = #{workOrgId,jdbcType=VARCHAR},
+      gztaskid = #{gztaskid,jdbcType=INTEGER}
+    where route_work_id = #{routeWorkId,jdbcType=VARCHAR}
+  </update>
+</mapper>

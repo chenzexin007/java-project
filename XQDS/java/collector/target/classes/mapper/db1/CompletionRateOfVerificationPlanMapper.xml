@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniteddata.xqds.collector.dao.mysql.CompletionRateOfVerificationPlanMapper">
+  <resultMap id="BaseResultMap" type="com.uniteddata.xqds.collector.entity.CompletionRateOfVerificationPlan">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    <result column="plan" jdbcType="VARCHAR" property="plan" />
+    <result column="rate_string" jdbcType="VARCHAR" property="rateString" />
+    <result column="rate" jdbcType="DOUBLE" property="rate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_time, update_time, `plan`, rate_string, rate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from completion_rate_of_verification_plan
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from completion_rate_of_verification_plan
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.uniteddata.xqds.collector.entity.CompletionRateOfVerificationPlan" useGeneratedKeys="true">
+    insert into completion_rate_of_verification_plan (create_time, update_time, `plan`, 
+      rate_string, rate)
+    values (#{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, #{plan,jdbcType=VARCHAR}, 
+      #{rateString,jdbcType=VARCHAR}, #{rate,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.uniteddata.xqds.collector.entity.CompletionRateOfVerificationPlan" useGeneratedKeys="true">
+    insert into completion_rate_of_verification_plan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="plan != null">
+        `plan`,
+      </if>
+      <if test="rateString != null">
+        rate_string,
+      </if>
+      <if test="rate != null">
+        rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="plan != null">
+        #{plan,jdbcType=VARCHAR},
+      </if>
+      <if test="rateString != null">
+        #{rateString,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uniteddata.xqds.collector.entity.CompletionRateOfVerificationPlan">
+    update completion_rate_of_verification_plan
+    <set>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="plan != null">
+        `plan` = #{plan,jdbcType=VARCHAR},
+      </if>
+      <if test="rateString != null">
+        rate_string = #{rateString,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null">
+        rate = #{rate,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uniteddata.xqds.collector.entity.CompletionRateOfVerificationPlan">
+    update completion_rate_of_verification_plan
+    set create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      `plan` = #{plan,jdbcType=VARCHAR},
+      rate_string = #{rateString,jdbcType=VARCHAR},
+      rate = #{rate,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

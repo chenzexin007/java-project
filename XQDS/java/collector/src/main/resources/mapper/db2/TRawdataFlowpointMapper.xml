@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniteddata.xqds.collector.dao.sqlserver.jddaq.TRawdataFlowpointMapper">
+  <resultMap id="BaseResultMap" type="com.uniteddata.xqds.collector.entity.TRawdataFlowpoint">
+    <id column="PointNO" jdbcType="OTHER" property="pointno" />
+    <result column="FlowSetVal" jdbcType="FLOAT" property="flowsetval" />
+    <result column="FlowSetPer" jdbcType="FLOAT" property="flowsetper" />
+    <result column="StdUnit" jdbcType="TINYINT" property="stdunit" />
+    <result column="PipeCfg" jdbcType="INTEGER" property="pipecfg" />
+    <result column="FmType" jdbcType="TINYINT" property="fmtype" />
+    <result column="StdSigType" jdbcType="TINYINT" property="stdsigtype" />
+    <result column="FmSigType" jdbcType="TINYINT" property="fmsigtype" />
+    <result column="StdXZMethod" jdbcType="TINYINT" property="stdxzmethod" />
+    <result column="FmXZMethod" jdbcType="TINYINT" property="fmxzmethod" />
+    <result column="CheckP" jdbcType="TINYINT" property="checkp" />
+    <result column="EnPres" jdbcType="FLOAT" property="enpres" />
+    <result column="EnTemp" jdbcType="FLOAT" property="entemp" />
+    <result column="EnRH" jdbcType="FLOAT" property="enrh" />
+    <result column="SetCheckNum" jdbcType="TINYINT" property="setchecknum" />
+    <result column="SetCheckTime" jdbcType="INTEGER" property="setchecktime" />
+    <result column="CheckNum" jdbcType="TINYINT" property="checknum" />
+    <result column="CheckState" jdbcType="TINYINT" property="checkstate" />
+    <result column="ValidFlag" jdbcType="INTEGER" property="validflag" />
+    <result column="NeededValidTimes" jdbcType="INTEGER" property="neededvalidtimes" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PointNO, FlowSetVal, FlowSetPer, StdUnit, PipeCfg, FmType, StdSigType, FmSigType, 
+    StdXZMethod, FmXZMethod, CheckP, EnPres, EnTemp, EnRH, SetCheckNum, SetCheckTime, 
+    CheckNum, CheckState, ValidFlag, NeededValidTimes
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Object" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_RawData_FlowPoint
+    where PointNO = #{pointno,jdbcType=OTHER}
+  </select>
+    <select id="selectByPoints" resultType="com.uniteddata.xqds.collector.entity.TRawdataFlowpoint">
+
+      select * from T_RawData_FlowPoint where CAST(PointNO as varchar(36)) in
+
+      <foreach item = "item" collection = "ids" open="(" separator="," close=")">
+        #{item}
+        </foreach>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Object">
+    delete from T_RawData_FlowPoint
+    where PointNO = #{pointno,jdbcType=OTHER}
+  </delete>
+  <insert id="insert" keyColumn="PointNO" keyProperty="pointno" parameterType="com.uniteddata.xqds.collector.entity.TRawdataFlowpoint" useGeneratedKeys="true">
+    insert into T_RawData_FlowPoint (FlowSetVal, FlowSetPer, StdUnit, 
+      PipeCfg, FmType, StdSigType, 
+      FmSigType, StdXZMethod, FmXZMethod, 
+      CheckP, EnPres, EnTemp, 
+      EnRH, SetCheckNum, SetCheckTime, 
+      CheckNum, CheckState, ValidFlag, 
+      NeededValidTimes)
+    values (#{flowsetval,jdbcType=FLOAT}, #{flowsetper,jdbcType=FLOAT}, #{stdunit,jdbcType=TINYINT}, 
+      #{pipecfg,jdbcType=INTEGER}, #{fmtype,jdbcType=TINYINT}, #{stdsigtype,jdbcType=TINYINT}, 
+      #{fmsigtype,jdbcType=TINYINT}, #{stdxzmethod,jdbcType=TINYINT}, #{fmxzmethod,jdbcType=TINYINT}, 
+      #{checkp,jdbcType=TINYINT}, #{enpres,jdbcType=FLOAT}, #{entemp,jdbcType=FLOAT}, 
+      #{enrh,jdbcType=FLOAT}, #{setchecknum,jdbcType=TINYINT}, #{setchecktime,jdbcType=INTEGER}, 
+      #{checknum,jdbcType=TINYINT}, #{checkstate,jdbcType=TINYINT}, #{validflag,jdbcType=INTEGER}, 
+      #{neededvalidtimes,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="PointNO" keyProperty="pointno" parameterType="com.uniteddata.xqds.collector.entity.TRawdataFlowpoint" useGeneratedKeys="true">
+    insert into T_RawData_FlowPoint
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="flowsetval != null">
+        FlowSetVal,
+      </if>
+      <if test="flowsetper != null">
+        FlowSetPer,
+      </if>
+      <if test="stdunit != null">
+        StdUnit,
+      </if>
+      <if test="pipecfg != null">
+        PipeCfg,
+      </if>
+      <if test="fmtype != null">
+        FmType,
+      </if>
+      <if test="stdsigtype != null">
+        StdSigType,
+      </if>
+      <if test="fmsigtype != null">
+        FmSigType,
+      </if>
+      <if test="stdxzmethod != null">
+        StdXZMethod,
+      </if>
+      <if test="fmxzmethod != null">
+        FmXZMethod,
+      </if>
+      <if test="checkp != null">
+        CheckP,
+      </if>
+      <if test="enpres != null">
+        EnPres,
+      </if>
+      <if test="entemp != null">
+        EnTemp,
+      </if>
+      <if test="enrh != null">
+        EnRH,
+      </if>
+      <if test="setchecknum != null">
+        SetCheckNum,
+      </if>
+      <if test="setchecktime != null">
+        SetCheckTime,
+      </if>
+      <if test="checknum != null">
+        CheckNum,
+      </if>
+      <if test="checkstate != null">
+        CheckState,
+      </if>
+      <if test="validflag != null">
+        ValidFlag,
+      </if>
+      <if test="neededvalidtimes != null">
+        NeededValidTimes,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="flowsetval != null">
+        #{flowsetval,jdbcType=FLOAT},
+      </if>
+      <if test="flowsetper != null">
+        #{flowsetper,jdbcType=FLOAT},
+      </if>
+      <if test="stdunit != null">
+        #{stdunit,jdbcType=TINYINT},
+      </if>
+      <if test="pipecfg != null">
+        #{pipecfg,jdbcType=INTEGER},
+      </if>
+      <if test="fmtype != null">
+        #{fmtype,jdbcType=TINYINT},
+      </if>
+      <if test="stdsigtype != null">
+        #{stdsigtype,jdbcType=TINYINT},
+      </if>
+      <if test="fmsigtype != null">
+        #{fmsigtype,jdbcType=TINYINT},
+      </if>
+      <if test="stdxzmethod != null">
+        #{stdxzmethod,jdbcType=TINYINT},
+      </if>
+      <if test="fmxzmethod != null">
+        #{fmxzmethod,jdbcType=TINYINT},
+      </if>
+      <if test="checkp != null">
+        #{checkp,jdbcType=TINYINT},
+      </if>
+      <if test="enpres != null">
+        #{enpres,jdbcType=FLOAT},
+      </if>
+      <if test="entemp != null">
+        #{entemp,jdbcType=FLOAT},
+      </if>
+      <if test="enrh != null">
+        #{enrh,jdbcType=FLOAT},
+      </if>
+      <if test="setchecknum != null">
+        #{setchecknum,jdbcType=TINYINT},
+      </if>
+      <if test="setchecktime != null">
+        #{setchecktime,jdbcType=INTEGER},
+      </if>
+      <if test="checknum != null">
+        #{checknum,jdbcType=TINYINT},
+      </if>
+      <if test="checkstate != null">
+        #{checkstate,jdbcType=TINYINT},
+      </if>
+      <if test="validflag != null">
+        #{validflag,jdbcType=INTEGER},
+      </if>
+      <if test="neededvalidtimes != null">
+        #{neededvalidtimes,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uniteddata.xqds.collector.entity.TRawdataFlowpoint">
+    update T_RawData_FlowPoint
+    <set>
+      <if test="flowsetval != null">
+        FlowSetVal = #{flowsetval,jdbcType=FLOAT},
+      </if>
+      <if test="flowsetper != null">
+        FlowSetPer = #{flowsetper,jdbcType=FLOAT},
+      </if>
+      <if test="stdunit != null">
+        StdUnit = #{stdunit,jdbcType=TINYINT},
+      </if>
+      <if test="pipecfg != null">
+        PipeCfg = #{pipecfg,jdbcType=INTEGER},
+      </if>
+      <if test="fmtype != null">
+        FmType = #{fmtype,jdbcType=TINYINT},
+      </if>
+      <if test="stdsigtype != null">
+        StdSigType = #{stdsigtype,jdbcType=TINYINT},
+      </if>
+      <if test="fmsigtype != null">
+        FmSigType = #{fmsigtype,jdbcType=TINYINT},
+      </if>
+      <if test="stdxzmethod != null">
+        StdXZMethod = #{stdxzmethod,jdbcType=TINYINT},
+      </if>
+      <if test="fmxzmethod != null">
+        FmXZMethod = #{fmxzmethod,jdbcType=TINYINT},
+      </if>
+      <if test="checkp != null">
+        CheckP = #{checkp,jdbcType=TINYINT},
+      </if>
+      <if test="enpres != null">
+        EnPres = #{enpres,jdbcType=FLOAT},
+      </if>
+      <if test="entemp != null">
+        EnTemp = #{entemp,jdbcType=FLOAT},
+      </if>
+      <if test="enrh != null">
+        EnRH = #{enrh,jdbcType=FLOAT},
+      </if>
+      <if test="setchecknum != null">
+        SetCheckNum = #{setchecknum,jdbcType=TINYINT},
+      </if>
+      <if test="setchecktime != null">
+        SetCheckTime = #{setchecktime,jdbcType=INTEGER},
+      </if>
+      <if test="checknum != null">
+        CheckNum = #{checknum,jdbcType=TINYINT},
+      </if>
+      <if test="checkstate != null">
+        CheckState = #{checkstate,jdbcType=TINYINT},
+      </if>
+      <if test="validflag != null">
+        ValidFlag = #{validflag,jdbcType=INTEGER},
+      </if>
+      <if test="neededvalidtimes != null">
+        NeededValidTimes = #{neededvalidtimes,jdbcType=INTEGER},
+      </if>
+    </set>
+    where PointNO = #{pointno,jdbcType=OTHER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uniteddata.xqds.collector.entity.TRawdataFlowpoint">
+    update T_RawData_FlowPoint
+    set FlowSetVal = #{flowsetval,jdbcType=FLOAT},
+      FlowSetPer = #{flowsetper,jdbcType=FLOAT},
+      StdUnit = #{stdunit,jdbcType=TINYINT},
+      PipeCfg = #{pipecfg,jdbcType=INTEGER},
+      FmType = #{fmtype,jdbcType=TINYINT},
+      StdSigType = #{stdsigtype,jdbcType=TINYINT},
+      FmSigType = #{fmsigtype,jdbcType=TINYINT},
+      StdXZMethod = #{stdxzmethod,jdbcType=TINYINT},
+      FmXZMethod = #{fmxzmethod,jdbcType=TINYINT},
+      CheckP = #{checkp,jdbcType=TINYINT},
+      EnPres = #{enpres,jdbcType=FLOAT},
+      EnTemp = #{entemp,jdbcType=FLOAT},
+      EnRH = #{enrh,jdbcType=FLOAT},
+      SetCheckNum = #{setchecknum,jdbcType=TINYINT},
+      SetCheckTime = #{setchecktime,jdbcType=INTEGER},
+      CheckNum = #{checknum,jdbcType=TINYINT},
+      CheckState = #{checkstate,jdbcType=TINYINT},
+      ValidFlag = #{validflag,jdbcType=INTEGER},
+      NeededValidTimes = #{neededvalidtimes,jdbcType=INTEGER}
+    where PointNO = #{pointno,jdbcType=OTHER}
+  </update>
+</mapper>

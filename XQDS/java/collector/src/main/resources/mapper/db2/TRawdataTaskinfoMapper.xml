@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniteddata.xqds.collector.dao.sqlserver.jddaq.TRawdataTaskinfoMapper">
+  <resultMap id="BaseResultMap" type="com.uniteddata.xqds.collector.entity.TRawdataTaskinfo">
+    <id column="TaskNO" jdbcType="INTEGER" property="taskno" />
+    <result column="SampNO1" jdbcType="CHAR" property="sampno1" />
+    <result column="SampNO2" jdbcType="CHAR" property="sampno2" />
+    <result column="SampNO3" jdbcType="CHAR" property="sampno3" />
+    <result column="StdUnit" jdbcType="SMALLINT" property="stdunit" />
+    <result column="StdSignal" jdbcType="SMALLINT" property="stdsignal" />
+    <result column="StdXZ" jdbcType="SMALLINT" property="stdxz" />
+    <result column="CalUnit" jdbcType="SMALLINT" property="calunit" />
+    <result column="FmNO" jdbcType="SMALLINT" property="fmno" />
+    <result column="FmSignal" jdbcType="SMALLINT" property="fmsignal" />
+    <result column="FmXZ" jdbcType="SMALLINT" property="fmxz" />
+    <result column="FmType" jdbcType="SMALLINT" property="fmtype" />
+    <result column="CheckP" jdbcType="SMALLINT" property="checkp" />
+    <result column="CurJDP" jdbcType="OTHER" property="curjdp" />
+    <result column="CurHYP" jdbcType="OTHER" property="curhyp" />
+    <result column="TaskType" jdbcType="SMALLINT" property="tasktype" />
+    <result column="TaskStatus" jdbcType="SMALLINT" property="taskstatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    TaskNO, SampNO1, SampNO2, SampNO3, StdUnit, StdSignal, StdXZ, CalUnit, FmNO, FmSignal, 
+    FmXZ, FmType, CheckP, CurJDP, CurHYP, TaskType, TaskStatus
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_RawData_TaskInfo
+    where TaskNO = #{taskno,jdbcType=INTEGER}
+  </select>
+    <select id="selectBySampNo" resultType="com.uniteddata.xqds.collector.entity.TRawdataTaskinfo">
+      select top 1
+      <include refid="Base_Column_List" />
+      from JD_DAQ.dbo.T_RawData_TaskInfo where SampNO1 = #{sampNo} or SampNO2 = #{sampNo} or SampNO3 = #{sampNo}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from T_RawData_TaskInfo
+    where TaskNO = #{taskno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="TaskNO" keyProperty="taskno" parameterType="com.uniteddata.xqds.collector.entity.TRawdataTaskinfo" useGeneratedKeys="true">
+    insert into T_RawData_TaskInfo (SampNO1, SampNO2, SampNO3, 
+      StdUnit, StdSignal, StdXZ, 
+      CalUnit, FmNO, FmSignal, 
+      FmXZ, FmType, CheckP, 
+      CurJDP, CurHYP, TaskType, 
+      TaskStatus)
+    values (#{sampno1,jdbcType=CHAR}, #{sampno2,jdbcType=CHAR}, #{sampno3,jdbcType=CHAR}, 
+      #{stdunit,jdbcType=SMALLINT}, #{stdsignal,jdbcType=SMALLINT}, #{stdxz,jdbcType=SMALLINT}, 
+      #{calunit,jdbcType=SMALLINT}, #{fmno,jdbcType=SMALLINT}, #{fmsignal,jdbcType=SMALLINT}, 
+      #{fmxz,jdbcType=SMALLINT}, #{fmtype,jdbcType=SMALLINT}, #{checkp,jdbcType=SMALLINT}, 
+      #{curjdp,jdbcType=OTHER}, #{curhyp,jdbcType=OTHER}, #{tasktype,jdbcType=SMALLINT}, 
+      #{taskstatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="TaskNO" keyProperty="taskno" parameterType="com.uniteddata.xqds.collector.entity.TRawdataTaskinfo" useGeneratedKeys="true">
+    insert into T_RawData_TaskInfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sampno1 != null">
+        SampNO1,
+      </if>
+      <if test="sampno2 != null">
+        SampNO2,
+      </if>
+      <if test="sampno3 != null">
+        SampNO3,
+      </if>
+      <if test="stdunit != null">
+        StdUnit,
+      </if>
+      <if test="stdsignal != null">
+        StdSignal,
+      </if>
+      <if test="stdxz != null">
+        StdXZ,
+      </if>
+      <if test="calunit != null">
+        CalUnit,
+      </if>
+      <if test="fmno != null">
+        FmNO,
+      </if>
+      <if test="fmsignal != null">
+        FmSignal,
+      </if>
+      <if test="fmxz != null">
+        FmXZ,
+      </if>
+      <if test="fmtype != null">
+        FmType,
+      </if>
+      <if test="checkp != null">
+        CheckP,
+      </if>
+      <if test="curjdp != null">
+        CurJDP,
+      </if>
+      <if test="curhyp != null">
+        CurHYP,
+      </if>
+      <if test="tasktype != null">
+        TaskType,
+      </if>
+      <if test="taskstatus != null">
+        TaskStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sampno1 != null">
+        #{sampno1,jdbcType=CHAR},
+      </if>
+      <if test="sampno2 != null">
+        #{sampno2,jdbcType=CHAR},
+      </if>
+      <if test="sampno3 != null">
+        #{sampno3,jdbcType=CHAR},
+      </if>
+      <if test="stdunit != null">
+        #{stdunit,jdbcType=SMALLINT},
+      </if>
+      <if test="stdsignal != null">
+        #{stdsignal,jdbcType=SMALLINT},
+      </if>
+      <if test="stdxz != null">
+        #{stdxz,jdbcType=SMALLINT},
+      </if>
+      <if test="calunit != null">
+        #{calunit,jdbcType=SMALLINT},
+      </if>
+      <if test="fmno != null">
+        #{fmno,jdbcType=SMALLINT},
+      </if>
+      <if test="fmsignal != null">
+        #{fmsignal,jdbcType=SMALLINT},
+      </if>
+      <if test="fmxz != null">
+        #{fmxz,jdbcType=SMALLINT},
+      </if>
+      <if test="fmtype != null">
+        #{fmtype,jdbcType=SMALLINT},
+      </if>
+      <if test="checkp != null">
+        #{checkp,jdbcType=SMALLINT},
+      </if>
+      <if test="curjdp != null">
+        #{curjdp,jdbcType=OTHER},
+      </if>
+      <if test="curhyp != null">
+        #{curhyp,jdbcType=OTHER},
+      </if>
+      <if test="tasktype != null">
+        #{tasktype,jdbcType=SMALLINT},
+      </if>
+      <if test="taskstatus != null">
+        #{taskstatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uniteddata.xqds.collector.entity.TRawdataTaskinfo">
+    update T_RawData_TaskInfo
+    <set>
+      <if test="sampno1 != null">
+        SampNO1 = #{sampno1,jdbcType=CHAR},
+      </if>
+      <if test="sampno2 != null">
+        SampNO2 = #{sampno2,jdbcType=CHAR},
+      </if>
+      <if test="sampno3 != null">
+        SampNO3 = #{sampno3,jdbcType=CHAR},
+      </if>
+      <if test="stdunit != null">
+        StdUnit = #{stdunit,jdbcType=SMALLINT},
+      </if>
+      <if test="stdsignal != null">
+        StdSignal = #{stdsignal,jdbcType=SMALLINT},
+      </if>
+      <if test="stdxz != null">
+        StdXZ = #{stdxz,jdbcType=SMALLINT},
+      </if>
+      <if test="calunit != null">
+        CalUnit = #{calunit,jdbcType=SMALLINT},
+      </if>
+      <if test="fmno != null">
+        FmNO = #{fmno,jdbcType=SMALLINT},
+      </if>
+      <if test="fmsignal != null">
+        FmSignal = #{fmsignal,jdbcType=SMALLINT},
+      </if>
+      <if test="fmxz != null">
+        FmXZ = #{fmxz,jdbcType=SMALLINT},
+      </if>
+      <if test="fmtype != null">
+        FmType = #{fmtype,jdbcType=SMALLINT},
+      </if>
+      <if test="checkp != null">
+        CheckP = #{checkp,jdbcType=SMALLINT},
+      </if>
+      <if test="curjdp != null">
+        CurJDP = #{curjdp,jdbcType=OTHER},
+      </if>
+      <if test="curhyp != null">
+        CurHYP = #{curhyp,jdbcType=OTHER},
+      </if>
+      <if test="tasktype != null">
+        TaskType = #{tasktype,jdbcType=SMALLINT},
+      </if>
+      <if test="taskstatus != null">
+        TaskStatus = #{taskstatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where TaskNO = #{taskno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uniteddata.xqds.collector.entity.TRawdataTaskinfo">
+    update T_RawData_TaskInfo
+    set SampNO1 = #{sampno1,jdbcType=CHAR},
+      SampNO2 = #{sampno2,jdbcType=CHAR},
+      SampNO3 = #{sampno3,jdbcType=CHAR},
+      StdUnit = #{stdunit,jdbcType=SMALLINT},
+      StdSignal = #{stdsignal,jdbcType=SMALLINT},
+      StdXZ = #{stdxz,jdbcType=SMALLINT},
+      CalUnit = #{calunit,jdbcType=SMALLINT},
+      FmNO = #{fmno,jdbcType=SMALLINT},
+      FmSignal = #{fmsignal,jdbcType=SMALLINT},
+      FmXZ = #{fmxz,jdbcType=SMALLINT},
+      FmType = #{fmtype,jdbcType=SMALLINT},
+      CheckP = #{checkp,jdbcType=SMALLINT},
+      CurJDP = #{curjdp,jdbcType=OTHER},
+      CurHYP = #{curhyp,jdbcType=OTHER},
+      TaskType = #{tasktype,jdbcType=SMALLINT},
+      TaskStatus = #{taskstatus,jdbcType=SMALLINT}
+    where TaskNO = #{taskno,jdbcType=INTEGER}
+  </update>
+</mapper>
